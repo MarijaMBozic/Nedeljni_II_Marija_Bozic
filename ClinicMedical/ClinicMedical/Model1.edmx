@@ -1,0 +1,688 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MedicaClinicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClinicDoctor">
+          <Key>
+            <PropertyRef Name="ClinicDoctorId" />
+          </Key>
+          <Property Name="ClinicDoctorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClinicUserId" Type="int" Nullable="false" />
+          <Property Name="UniqueNumber" Type="int" Nullable="false" />
+          <Property Name="BancAccount" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="WorkShiftId" Type="int" Nullable="false" />
+          <Property Name="InChargeOfAdmission" Type="bit" Nullable="false" />
+          <Property Name="ClinicManagerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClinicMaintenance">
+          <Key>
+            <PropertyRef Name="ClinicMaintenanceId" />
+          </Key>
+          <Property Name="ClinicMaintenanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClinicUserId" Type="int" Nullable="false" />
+          <Property Name="PermissionToExpandClinic" Type="bit" Nullable="false" />
+          <Property Name="ResponsibleForVehicleAccessibility" Type="bit" Nullable="false" />
+          <Property Name="ResponsibleForAccessOfHandicaps" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClinicManager">
+          <Key>
+            <PropertyRef Name="ClinicManagerId" />
+          </Key>
+          <Property Name="ClinicManagerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClinicUserId" Type="int" Nullable="false" />
+          <Property Name="ClinicFloor" Type="int" Nullable="false" />
+          <Property Name="MaxNumOfDoctorsSupervised" Type="int" Nullable="false" />
+          <Property Name="MinNumOfRoomSupervised" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClinicPatient">
+          <Key>
+            <PropertyRef Name="ClinicPatientId" />
+          </Key>
+          <Property Name="ClinicPatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClinicUserId" Type="int" Nullable="false" />
+          <Property Name="InsuranceNumber" Type="int" Nullable="false" />
+          <Property Name="InsuranceExpirationDate" Type="date" Nullable="false" />
+          <Property Name="UniqueDoctorNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClinicUser">
+          <Key>
+            <PropertyRef Name="ClinicUserId" />
+          </Key>
+          <Property Name="ClinicUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IDNumber" Type="int" Nullable="false" />
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Citizenship" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Institution">
+          <Key>
+            <PropertyRef Name="InstitutionId" />
+          </Key>
+          <Property Name="InstitutionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NumberOfFloors" Type="int" Nullable="false" />
+          <Property Name="NumberOfRoomsPerFloor" Type="int" Nullable="false" />
+          <Property Name="Terrace" Type="bit" Nullable="false" />
+          <Property Name="Backyard" Type="bit" Nullable="false" />
+          <Property Name="AccessPointsForAmbulances" Type="int" Nullable="false" />
+          <Property Name="AccessPointsForhandicaps" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workshift">
+          <Key>
+            <PropertyRef Name="WorkShiftId" />
+          </Key>
+          <Property Name="WorkShiftId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ClinicDoc__Clini__07C12930">
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
+          <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicUser">
+              <PropertyRef Name="ClinicUserId" />
+            </Principal>
+            <Dependent Role="ClinicDoctor">
+              <PropertyRef Name="ClinicUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicDoc__Clini__0A9D95DB">
+          <End Role="ClinicManager" Type="Self.ClinicManager" Multiplicity="1" />
+          <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicManager">
+              <PropertyRef Name="ClinicManagerId" />
+            </Principal>
+            <Dependent Role="ClinicDoctor">
+              <PropertyRef Name="ClinicManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicDoc__Depar__08B54D69">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="ClinicDoctor">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicDoc__WorkS__09A971A2">
+          <End Role="Workshift" Type="Self.Workshift" Multiplicity="1" />
+          <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshift">
+              <PropertyRef Name="WorkShiftId" />
+            </Principal>
+            <Dependent Role="ClinicDoctor">
+              <PropertyRef Name="WorkShiftId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicMai__Clini__01142BA1">
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
+          <End Role="ClinicMaintenance" Type="Self.ClinicMaintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicUser">
+              <PropertyRef Name="ClinicUserId" />
+            </Principal>
+            <Dependent Role="ClinicMaintenance">
+              <PropertyRef Name="ClinicUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicMan__Clini__03F0984C">
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
+          <End Role="ClinicManager" Type="Self.ClinicManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicUser">
+              <PropertyRef Name="ClinicUserId" />
+            </Principal>
+            <Dependent Role="ClinicManager">
+              <PropertyRef Name="ClinicUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicPat__Clini__0D7A0286">
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
+          <End Role="ClinicPatient" Type="Self.ClinicPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicUser">
+              <PropertyRef Name="ClinicUserId" />
+            </Principal>
+            <Dependent Role="ClinicPatient">
+              <PropertyRef Name="ClinicUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__ClinicPat__Uniqu__0E6E26BF' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__ClinicPat__Uniqu__0E6E26BF" />-->
+        <Association Name="FK__ClinicUse__Gende__7D439ABD">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="ClinicUser">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicUse__RoleI__7E37BEF6">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="ClinicUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedicaClinicModelStoreContainer">
+          <EntitySet Name="ClinicDoctor" EntityType="Self.ClinicDoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClinicMaintenance" EntityType="Self.ClinicMaintenance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClinicManager" EntityType="Self.ClinicManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClinicPatient" EntityType="Self.ClinicPatient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClinicUser" EntityType="Self.ClinicUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Institution" EntityType="Self.Institution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workshift" EntityType="Self.Workshift" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ClinicDoc__Clini__07C12930" Association="Self.FK__ClinicDoc__Clini__07C12930">
+            <End Role="ClinicUser" EntitySet="ClinicUser" />
+            <End Role="ClinicDoctor" EntitySet="ClinicDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicDoc__Clini__0A9D95DB" Association="Self.FK__ClinicDoc__Clini__0A9D95DB">
+            <End Role="ClinicManager" EntitySet="ClinicManager" />
+            <End Role="ClinicDoctor" EntitySet="ClinicDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicDoc__Depar__08B54D69" Association="Self.FK__ClinicDoc__Depar__08B54D69">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="ClinicDoctor" EntitySet="ClinicDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicDoc__WorkS__09A971A2" Association="Self.FK__ClinicDoc__WorkS__09A971A2">
+            <End Role="Workshift" EntitySet="Workshift" />
+            <End Role="ClinicDoctor" EntitySet="ClinicDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicMai__Clini__01142BA1" Association="Self.FK__ClinicMai__Clini__01142BA1">
+            <End Role="ClinicUser" EntitySet="ClinicUser" />
+            <End Role="ClinicMaintenance" EntitySet="ClinicMaintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicMan__Clini__03F0984C" Association="Self.FK__ClinicMan__Clini__03F0984C">
+            <End Role="ClinicUser" EntitySet="ClinicUser" />
+            <End Role="ClinicManager" EntitySet="ClinicManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicPat__Clini__0D7A0286" Association="Self.FK__ClinicPat__Clini__0D7A0286">
+            <End Role="ClinicUser" EntitySet="ClinicUser" />
+            <End Role="ClinicPatient" EntitySet="ClinicPatient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicUse__Gende__7D439ABD" Association="Self.FK__ClinicUse__Gende__7D439ABD">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="ClinicUser" EntitySet="ClinicUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicUse__RoleI__7E37BEF6" Association="Self.FK__ClinicUse__RoleI__7E37BEF6">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="ClinicUser" EntitySet="ClinicUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedicaClinicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClinicDoctor">
+          <Key>
+            <PropertyRef Name="ClinicDoctorId" />
+          </Key>
+          <Property Name="ClinicDoctorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClinicUserId" Type="Int32" Nullable="false" />
+          <Property Name="UniqueNumber" Type="Int32" Nullable="false" />
+          <Property Name="BancAccount" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="WorkShiftId" Type="Int32" Nullable="false" />
+          <Property Name="InChargeOfAdmission" Type="Boolean" Nullable="false" />
+          <Property Name="ClinicManagerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicDoc__Clini__07C12930" FromRole="ClinicDoctor" ToRole="ClinicUser" />
+          <NavigationProperty Name="ClinicManager" Relationship="Self.FK__ClinicDoc__Clini__0A9D95DB" FromRole="ClinicDoctor" ToRole="ClinicManager" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__ClinicDoc__Depar__08B54D69" FromRole="ClinicDoctor" ToRole="Department" />
+          <NavigationProperty Name="Workshift" Relationship="Self.FK__ClinicDoc__WorkS__09A971A2" FromRole="ClinicDoctor" ToRole="Workshift" />
+        </EntityType>
+        <EntityType Name="ClinicMaintenance">
+          <Key>
+            <PropertyRef Name="ClinicMaintenanceId" />
+          </Key>
+          <Property Name="ClinicMaintenanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClinicUserId" Type="Int32" Nullable="false" />
+          <Property Name="PermissionToExpandClinic" Type="Boolean" Nullable="false" />
+          <Property Name="ResponsibleForVehicleAccessibility" Type="Boolean" Nullable="false" />
+          <Property Name="ResponsibleForAccessOfHandicaps" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicMai__Clini__01142BA1" FromRole="ClinicMaintenance" ToRole="ClinicUser" />
+        </EntityType>
+        <EntityType Name="ClinicManager">
+          <Key>
+            <PropertyRef Name="ClinicManagerId" />
+          </Key>
+          <Property Name="ClinicManagerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClinicUserId" Type="Int32" Nullable="false" />
+          <Property Name="ClinicFloor" Type="Int32" Nullable="false" />
+          <Property Name="MaxNumOfDoctorsSupervised" Type="Int32" Nullable="false" />
+          <Property Name="MinNumOfRoomSupervised" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__Clini__0A9D95DB" FromRole="ClinicManager" ToRole="ClinicDoctor" />
+          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicMan__Clini__03F0984C" FromRole="ClinicManager" ToRole="ClinicUser" />
+        </EntityType>
+        <EntityType Name="ClinicPatient">
+          <Key>
+            <PropertyRef Name="ClinicPatientId" />
+          </Key>
+          <Property Name="ClinicPatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClinicUserId" Type="Int32" Nullable="false" />
+          <Property Name="InsuranceNumber" Type="Int32" Nullable="false" />
+          <Property Name="InsuranceExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UniqueDoctorNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicPat__Clini__0D7A0286" FromRole="ClinicPatient" ToRole="ClinicUser" />
+        </EntityType>
+        <EntityType Name="ClinicUser">
+          <Key>
+            <PropertyRef Name="ClinicUserId" />
+          </Key>
+          <Property Name="ClinicUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDNumber" Type="Int32" Nullable="false" />
+          <Property Name="GenderId" Type="Int32" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Citizenship" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__Clini__07C12930" FromRole="ClinicUser" ToRole="ClinicDoctor" />
+          <NavigationProperty Name="ClinicMaintenances" Relationship="Self.FK__ClinicMai__Clini__01142BA1" FromRole="ClinicUser" ToRole="ClinicMaintenance" />
+          <NavigationProperty Name="ClinicManagers" Relationship="Self.FK__ClinicMan__Clini__03F0984C" FromRole="ClinicUser" ToRole="ClinicManager" />
+          <NavigationProperty Name="ClinicPatients" Relationship="Self.FK__ClinicPat__Clini__0D7A0286" FromRole="ClinicUser" ToRole="ClinicPatient" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK__ClinicUse__Gende__7D439ABD" FromRole="ClinicUser" ToRole="Gender" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__ClinicUse__RoleI__7E37BEF6" FromRole="ClinicUser" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__Depar__08B54D69" FromRole="Department" ToRole="ClinicDoctor" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ClinicUsers" Relationship="Self.FK__ClinicUse__Gende__7D439ABD" FromRole="Gender" ToRole="ClinicUser" />
+        </EntityType>
+        <EntityType Name="Institution">
+          <Key>
+            <PropertyRef Name="InstitutionId" />
+          </Key>
+          <Property Name="InstitutionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Owner" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberOfFloors" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfRoomsPerFloor" Type="Int32" Nullable="false" />
+          <Property Name="Terrace" Type="Boolean" Nullable="false" />
+          <Property Name="Backyard" Type="Boolean" Nullable="false" />
+          <Property Name="AccessPointsForAmbulances" Type="Int32" Nullable="false" />
+          <Property Name="AccessPointsForhandicaps" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ClinicUsers" Relationship="Self.FK__ClinicUse__RoleI__7E37BEF6" FromRole="Role" ToRole="ClinicUser" />
+        </EntityType>
+        <EntityType Name="Workshift">
+          <Key>
+            <PropertyRef Name="WorkShiftId" />
+          </Key>
+          <Property Name="WorkShiftId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__WorkS__09A971A2" FromRole="Workshift" ToRole="ClinicDoctor" />
+        </EntityType>
+        <Association Name="FK__ClinicDoc__Clini__07C12930">
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
+          <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicUser">
+              <PropertyRef Name="ClinicUserId" />
+            </Principal>
+            <Dependent Role="ClinicDoctor">
+              <PropertyRef Name="ClinicUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicDoc__Clini__0A9D95DB">
+          <End Role="ClinicManager" Type="Self.ClinicManager" Multiplicity="1" />
+          <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicManager">
+              <PropertyRef Name="ClinicManagerId" />
+            </Principal>
+            <Dependent Role="ClinicDoctor">
+              <PropertyRef Name="ClinicManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicDoc__Depar__08B54D69">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="ClinicDoctor">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicDoc__WorkS__09A971A2">
+          <End Role="Workshift" Type="Self.Workshift" Multiplicity="1" />
+          <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshift">
+              <PropertyRef Name="WorkShiftId" />
+            </Principal>
+            <Dependent Role="ClinicDoctor">
+              <PropertyRef Name="WorkShiftId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicMai__Clini__01142BA1">
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
+          <End Role="ClinicMaintenance" Type="Self.ClinicMaintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicUser">
+              <PropertyRef Name="ClinicUserId" />
+            </Principal>
+            <Dependent Role="ClinicMaintenance">
+              <PropertyRef Name="ClinicUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicMan__Clini__03F0984C">
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
+          <End Role="ClinicManager" Type="Self.ClinicManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicUser">
+              <PropertyRef Name="ClinicUserId" />
+            </Principal>
+            <Dependent Role="ClinicManager">
+              <PropertyRef Name="ClinicUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicPat__Clini__0D7A0286">
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
+          <End Role="ClinicPatient" Type="Self.ClinicPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClinicUser">
+              <PropertyRef Name="ClinicUserId" />
+            </Principal>
+            <Dependent Role="ClinicPatient">
+              <PropertyRef Name="ClinicUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicUse__Gende__7D439ABD">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="ClinicUser">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClinicUse__RoleI__7E37BEF6">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="ClinicUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedicaClinicEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClinicDoctors" EntityType="Self.ClinicDoctor" />
+          <EntitySet Name="ClinicMaintenances" EntityType="Self.ClinicMaintenance" />
+          <EntitySet Name="ClinicManagers" EntityType="Self.ClinicManager" />
+          <EntitySet Name="ClinicPatients" EntityType="Self.ClinicPatient" />
+          <EntitySet Name="ClinicUsers" EntityType="Self.ClinicUser" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="Institutions" EntityType="Self.Institution" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Workshifts" EntityType="Self.Workshift" />
+          <AssociationSet Name="FK__ClinicDoc__Clini__07C12930" Association="Self.FK__ClinicDoc__Clini__07C12930">
+            <End Role="ClinicUser" EntitySet="ClinicUsers" />
+            <End Role="ClinicDoctor" EntitySet="ClinicDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicDoc__Clini__0A9D95DB" Association="Self.FK__ClinicDoc__Clini__0A9D95DB">
+            <End Role="ClinicManager" EntitySet="ClinicManagers" />
+            <End Role="ClinicDoctor" EntitySet="ClinicDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicDoc__Depar__08B54D69" Association="Self.FK__ClinicDoc__Depar__08B54D69">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="ClinicDoctor" EntitySet="ClinicDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicDoc__WorkS__09A971A2" Association="Self.FK__ClinicDoc__WorkS__09A971A2">
+            <End Role="Workshift" EntitySet="Workshifts" />
+            <End Role="ClinicDoctor" EntitySet="ClinicDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicMai__Clini__01142BA1" Association="Self.FK__ClinicMai__Clini__01142BA1">
+            <End Role="ClinicUser" EntitySet="ClinicUsers" />
+            <End Role="ClinicMaintenance" EntitySet="ClinicMaintenances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicMan__Clini__03F0984C" Association="Self.FK__ClinicMan__Clini__03F0984C">
+            <End Role="ClinicUser" EntitySet="ClinicUsers" />
+            <End Role="ClinicManager" EntitySet="ClinicManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicPat__Clini__0D7A0286" Association="Self.FK__ClinicPat__Clini__0D7A0286">
+            <End Role="ClinicUser" EntitySet="ClinicUsers" />
+            <End Role="ClinicPatient" EntitySet="ClinicPatients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicUse__Gende__7D439ABD" Association="Self.FK__ClinicUse__Gende__7D439ABD">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="ClinicUser" EntitySet="ClinicUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClinicUse__RoleI__7E37BEF6" Association="Self.FK__ClinicUse__RoleI__7E37BEF6">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="ClinicUser" EntitySet="ClinicUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MedicaClinicModelStoreContainer" CdmEntityContainer="MedicaClinicEntities">
+          <EntitySetMapping Name="ClinicDoctors">
+            <EntityTypeMapping TypeName="MedicaClinicModel.ClinicDoctor">
+              <MappingFragment StoreEntitySet="ClinicDoctor">
+                <ScalarProperty Name="ClinicDoctorId" ColumnName="ClinicDoctorId" />
+                <ScalarProperty Name="ClinicUserId" ColumnName="ClinicUserId" />
+                <ScalarProperty Name="UniqueNumber" ColumnName="UniqueNumber" />
+                <ScalarProperty Name="BancAccount" ColumnName="BancAccount" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="WorkShiftId" ColumnName="WorkShiftId" />
+                <ScalarProperty Name="InChargeOfAdmission" ColumnName="InChargeOfAdmission" />
+                <ScalarProperty Name="ClinicManagerId" ColumnName="ClinicManagerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClinicMaintenances">
+            <EntityTypeMapping TypeName="MedicaClinicModel.ClinicMaintenance">
+              <MappingFragment StoreEntitySet="ClinicMaintenance">
+                <ScalarProperty Name="ClinicMaintenanceId" ColumnName="ClinicMaintenanceId" />
+                <ScalarProperty Name="ClinicUserId" ColumnName="ClinicUserId" />
+                <ScalarProperty Name="PermissionToExpandClinic" ColumnName="PermissionToExpandClinic" />
+                <ScalarProperty Name="ResponsibleForVehicleAccessibility" ColumnName="ResponsibleForVehicleAccessibility" />
+                <ScalarProperty Name="ResponsibleForAccessOfHandicaps" ColumnName="ResponsibleForAccessOfHandicaps" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClinicManagers">
+            <EntityTypeMapping TypeName="MedicaClinicModel.ClinicManager">
+              <MappingFragment StoreEntitySet="ClinicManager">
+                <ScalarProperty Name="ClinicManagerId" ColumnName="ClinicManagerId" />
+                <ScalarProperty Name="ClinicUserId" ColumnName="ClinicUserId" />
+                <ScalarProperty Name="ClinicFloor" ColumnName="ClinicFloor" />
+                <ScalarProperty Name="MaxNumOfDoctorsSupervised" ColumnName="MaxNumOfDoctorsSupervised" />
+                <ScalarProperty Name="MinNumOfRoomSupervised" ColumnName="MinNumOfRoomSupervised" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClinicPatients">
+            <EntityTypeMapping TypeName="MedicaClinicModel.ClinicPatient">
+              <MappingFragment StoreEntitySet="ClinicPatient">
+                <ScalarProperty Name="ClinicPatientId" ColumnName="ClinicPatientId" />
+                <ScalarProperty Name="ClinicUserId" ColumnName="ClinicUserId" />
+                <ScalarProperty Name="InsuranceNumber" ColumnName="InsuranceNumber" />
+                <ScalarProperty Name="InsuranceExpirationDate" ColumnName="InsuranceExpirationDate" />
+                <ScalarProperty Name="UniqueDoctorNumber" ColumnName="UniqueDoctorNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClinicUsers">
+            <EntityTypeMapping TypeName="MedicaClinicModel.ClinicUser">
+              <MappingFragment StoreEntitySet="ClinicUser">
+                <ScalarProperty Name="ClinicUserId" ColumnName="ClinicUserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="MedicaClinicModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="MedicaClinicModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Institutions">
+            <EntityTypeMapping TypeName="MedicaClinicModel.Institution">
+              <MappingFragment StoreEntitySet="Institution">
+                <ScalarProperty Name="InstitutionId" ColumnName="InstitutionId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="NumberOfFloors" ColumnName="NumberOfFloors" />
+                <ScalarProperty Name="NumberOfRoomsPerFloor" ColumnName="NumberOfRoomsPerFloor" />
+                <ScalarProperty Name="Terrace" ColumnName="Terrace" />
+                <ScalarProperty Name="Backyard" ColumnName="Backyard" />
+                <ScalarProperty Name="AccessPointsForAmbulances" ColumnName="AccessPointsForAmbulances" />
+                <ScalarProperty Name="AccessPointsForhandicaps" ColumnName="AccessPointsForhandicaps" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="MedicaClinicModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workshifts">
+            <EntityTypeMapping TypeName="MedicaClinicModel.Workshift">
+              <MappingFragment StoreEntitySet="Workshift">
+                <ScalarProperty Name="WorkShiftId" ColumnName="WorkShiftId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
