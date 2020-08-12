@@ -27,7 +27,7 @@ namespace ClinicMedical
         public string FullName { get; set; }
         public int IDNumber { get; set; }
         public int GenderId { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string Citizenship { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

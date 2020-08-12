@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="42ec0b324b684da199dbbd26e149a014" Name="Diagram1">
+      <Diagram DiagramId="6bd3f055e6ee485cbc28c84f4082d765" Name="Diagram1">
         <EntityTypeShape EntityType="MedicaClinicModel.ClinicDoctor" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MedicaClinicModel.ClinicMaintenance" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MedicaClinicModel.ClinicManager" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
@@ -15,15 +15,15 @@
         <EntityTypeShape EntityType="MedicaClinicModel.Institution" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MedicaClinicModel.Role" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MedicaClinicModel.Workshift" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Clini__07C12930" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Clini__0A9D95DB" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Depar__08B54D69" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__WorkS__09A971A2" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicMai__Clini__01142BA1" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicMan__Clini__03F0984C" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicPat__Clini__0D7A0286" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicUse__Gende__7D439ABD" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicUse__RoleI__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Clini__37FA4C37" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Clini__3AD6B8E2" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Depar__38EE7070" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__WorkS__39E294A9" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicMai__Clini__314D4EA8" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicMan__Clini__3429BB53" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicPat__Clini__3DB3258D" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicUse__Gende__2C88998B" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicUse__RoleI__2E70E1FD" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

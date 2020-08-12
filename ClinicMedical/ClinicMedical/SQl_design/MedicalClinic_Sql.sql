@@ -32,7 +32,8 @@ create table Department(
    )
 
 create table Institution(
-   InstitutionId               int            identity (1,1) primary key,   
+   InstitutionId               int            identity (1,1) primary key,
+   BuildDate				   date			   default getDate(),
    Name                        nvarchar(100)   unique not null,
    Owner                       nvarchar(100)          not null,
    Address                     nvarchar(100)          not null,
@@ -46,11 +47,11 @@ create table Institution(
 
 create table ClinicUser(
    ClinicUserId                int            identity (1,1) primary key,   
-   FullName                    nvarchar(100)   unique not null,
-   IDNumber                    int                    not null,
+   FullName                    nvarchar(100)           not null,
+   IDNumber                    int             unique  not null,
    GenderId                    int                    not null,
    FOREIGN KEY (GenderId)  REFERENCES Gender(GenderId),
-   DateOfBirth                 date                   not null,
+   DateOfBirth                 date                   default getDate(),
    Citizenship                 nvarchar(100)          not null,
    Username                    nvarchar(100)  unique  not null,
    Password                    nvarchar(100)          not null,
@@ -108,10 +109,12 @@ values('Female'),
       ('Male')
 
 Insert into Role(Name)
-values('Maintenance'),
+values('Administrator'),
+      ('Maintenance'),
       ('Manager'),
 	  ('Doctor'),
       ('Patient')
+	  
 
 Insert into Workshift(Name)
 values('Morning'),

@@ -1,8 +1,11 @@
 ﻿using ClinicMedical.Commands;
+using ClinicMedical.Service;
+using ClinicMedical.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +16,7 @@ namespace ClinicMedical.ViewModel
     public class MainWindowViewModel:ViewModelBase
     {
         MainWindow main;
-
+        
         #region Constructor
 
         public MainWindowViewModel(MainWindow mainOpen)
@@ -59,19 +62,20 @@ namespace ClinicMedical.ViewModel
             {
                 var passwordBox = parametar as PasswordBox;
                 var password = passwordBox.Password;
-                //ServiceCode service = new ServiceCode();
 
-                //Customer customer = service.Login(Username, password);
-                //if (customer == null)
-                //{
-                //    MessageBox.Show("Uneti korisnik ne postoji!");
-                //}
-                //else
-                //{
-                //    CustomerView window = new CustomerView(customer);
-                //    window.Show();
-                //    main.Close();
-                //}
+                if (MasterLogin.Login(username, password) == true)
+                {
+                    MessageBox.Show("Successful login");
+                    MasterAdminView window = new MasterAdminView();
+                    window.Show();
+                    main.Close();
+                }
+                //else if()
+                else
+                {
+                    MessageBox.Show("Wrong user or password credentials");
+                }
+
             }
             catch (Exception ex)
             {
@@ -79,5 +83,7 @@ namespace ClinicMedical.ViewModel
             }
         }
         #endregion
+
+        
     }
 }

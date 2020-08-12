@@ -13,10 +13,10 @@ namespace ClinicMedical
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MedicaClinicEntities : DbContext
+    public partial class MedicaClinicEntities1 : DbContext
     {
-        public MedicaClinicEntities()
-            : base("name=MedicaClinicEntities")
+        public MedicaClinicEntities1()
+            : base("name=MedicaClinicEntities1")
         {
         }
     
