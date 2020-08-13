@@ -103,12 +103,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Manager.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Role.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\Logging.cs" />
     <Compile Include="Service\MasterLogin.cs" />
     <Compile Include="Service\ServiceCode.cs" />
+    <Compile Include="veDoctor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AddDoctorViewModel.cs" />
     <Compile Include="ViewModel\AddInstitutionViewModel.cs" />
     <Compile Include="ViewModel\AddMaintainancViewModel.cs" />
@@ -116,6 +121,7 @@
     <Compile Include="ViewModel\AddPatientViewModel.cs" />
     <Compile Include="ViewModel\AdministratorViewModel.cs" />
     <Compile Include="ViewModel\MaintainancViewModel.cs" />
+    <Compile Include="ViewModel\ManagerViewModel.cs" />
     <Compile Include="ViewModel\MasterAdminViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -154,6 +160,9 @@
     </Compile>
     <Compile Include="Views\PatientView.xaml.cs">
       <DependentUpon>PatientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="vwManager.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Workshift.cs">
       <DependentUpon>Model1.tt</DependentUpon>

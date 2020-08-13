@@ -93,7 +93,6 @@ namespace ClinicMedical.ViewModel
             return true;
         }
                
-
         private ICommand goToMaintainanc;
 
         public ICommand GoToMaintainanc

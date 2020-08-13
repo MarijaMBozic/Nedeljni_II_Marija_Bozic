@@ -35,5 +35,7 @@ namespace ClinicMedical
         public virtual DbSet<Institution> Institutions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Workshift> Workshifts { get; set; }
+        public virtual DbSet<veDoctor> veDoctors { get; set; }
+        public virtual DbSet<vwManager> vwManagers { get; set; }
     }
 }

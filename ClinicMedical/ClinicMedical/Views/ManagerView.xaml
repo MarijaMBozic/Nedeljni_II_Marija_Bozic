@@ -7,6 +7,93 @@
         mc:Ignorable="d"
         Title="ManagerView" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="13" Grid.Row="1" Name="btnLogOut" Content="LogOut" Width="70" Height="20"
+                Command="{Binding LogOutManager, UpdateSourceTrigger=PropertyChanged}"
+                FontWeight="Bold" HorizontalAlignment="Left"/>
+        <Button Grid.Column="9" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,5,0" Name="btnBack" Content="Back to main page" Width="130" Height="20"
+                Command="{Binding LogOutManager, UpdateSourceTrigger=PropertyChanged}"
+                FontWeight="Bold" HorizontalAlignment="Right"/>
+        <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="10" Name="DataGridResults" ItemsSource="{Binding ListOFManagers, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedManager, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
+                      AutoGenerateColumns="False" HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black" FontWeight="Bold" Grid.ColumnSpan="13">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="FullName " Binding="{Binding FullName}" Width="150"/>
+                <DataGridTextColumn Header="ID number" Binding="{Binding IDNumber}"/>
+                <DataGridTextColumn Header="Date of birth" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" Width="100"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding GenderName}"/>
+                <DataGridTextColumn Header="Citizenship " Binding="{Binding Citizenship}" Width="80"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="100"/>
+                <DataGridTextColumn Header="Floors" Binding="{Binding ClinicFloor}" Width="60"/>
+                <DataGridTextColumn Header="Doctors" Binding="{Binding MaxNumOfDoctorsSupervised}" Width="60"/>
+                <DataGridTextColumn Header="Rooms" Binding="{Binding MinNumOfRoomSupervised}" Width="50"/>
+                <DataGridTextColumn Header="Mistake" Binding="{Binding NumberOfMistake}" Width="60"/>
+                <DataGridTemplateColumn Header="Edit" Width="60" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="150" Orientation="Horizontal">
+                                <Button Name="btnAprRequest" Content="Edit" Width="60" Height="20"
+                                         FontWeight="Bold" Margin="0" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Delete" Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Button Name="btnDeleteRequest" Content="Delete" Width="60" Height="20" IsEnabled="{Binding IsApproved}"
+                                         FontWeight="Bold" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="1" Grid.Row="1" Name="btnAddNewMenager" Content="Add new menager" Width="130" Height="20"
+                Command="{Binding AddNewMenager, UpdateSourceTrigger=PropertyChanged}"
+                FontWeight="Bold" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

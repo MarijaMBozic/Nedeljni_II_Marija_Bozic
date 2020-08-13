@@ -1,7 +1,10 @@
 ﻿using ClinicMedical.Helper;
+using ClinicMedical.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -519,7 +522,23 @@ namespace ClinicMedical.Service
             }
         }
 
+        public List<vwManager> GetAllvwDoctorsList()
+        {
+            try
+            {
+                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                {
+                    List<vwManager> list = new List<vwManager>();
+                    list = (from p in context.vwManagers  select p).ToList();
+                    return list;
+                }      
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                return null;
+            }
+        }
 
-        
     }
 }
