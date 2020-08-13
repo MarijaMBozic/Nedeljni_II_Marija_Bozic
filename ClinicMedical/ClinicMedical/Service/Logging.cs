@@ -10,11 +10,11 @@ namespace ClinicMedical.Service
 {
     public class Logging
     {
-        public static void LoggAction(string typeOfAction, string status)
+        public static void LoggAction(string typeOfAction, string status, string message)
         {           
             FileInfo txt = new FileInfo(@"..\..\LoggedInfo\Logging.txt");
             StreamWriter sw = txt.AppendText();            
-            sw.WriteLine("[{0}][{1}][{2}] ", DateTime.Now, typeOfAction, status);
+            sw.WriteLine("[{0}][{1}][{2}][{3}] ", DateTime.Now, typeOfAction, status, message);
             sw.Close();
         }
     }

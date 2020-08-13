@@ -139,13 +139,11 @@ namespace ClinicMedical.Views
             IsAddingNewClientUserEnabled();
         }
 
-
         private void txtAdminUsername_TextChanged(object sender, TextChangedEventArgs e)
         {
             UsernameValidation(txtAdminUsername, lblValidationAdminUsername);
             IsAddingNewClientUserEnabled();
         }
-
 
         private void PasswordValidation(PasswordBox txtPass, Label lblValidationPass)
         {

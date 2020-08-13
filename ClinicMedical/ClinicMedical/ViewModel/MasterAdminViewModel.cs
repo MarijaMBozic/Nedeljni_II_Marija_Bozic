@@ -110,12 +110,17 @@ namespace ClinicMedical.ViewModel
             User.RoleId = 1;
             try
             {
-                service.AddClinicUser(User);                          
-                MessageBox.Show("You have successfully added new Clinic administrator");
+                if (service.AddClinicUser(User) != 0)
+                {
+                    MessageBox.Show("You have successfully added new Clinic administrator");
+                    Logging.LoggAction("MasterAminViewModel", "Info", "Succesfull added new Administrator");
+                }
+           
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+                Logging.LoggAction("MasterAminViewModel", "Error", ex.ToString());
             }
             User = new ClinicUser();
             masterAdminView.txtAdminPassword.Password = "";

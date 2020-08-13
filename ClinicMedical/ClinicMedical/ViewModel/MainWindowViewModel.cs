@@ -16,12 +16,13 @@ namespace ClinicMedical.ViewModel
     public class MainWindowViewModel:ViewModelBase
     {
         MainWindow main;
+        ServiceCode service = new ServiceCode();
         
         #region Constructor
-
         public MainWindowViewModel(MainWindow mainOpen)
         {
             this.main = mainOpen;
+            Institution = service.GetAllInstitution();
         }
         #endregion
 
@@ -37,6 +38,20 @@ namespace ClinicMedical.ViewModel
             {
                 username = value;
                 OnPropertyChanged("Username");
+            }
+        }
+
+        private List<Institution> institution;
+        public List<Institution> Institution
+        {
+            get
+            {
+                return institution;
+            }
+            set
+            {
+                institution = value;
+                OnPropertyChanged("Institution");
             }
         }
 
@@ -58,19 +73,55 @@ namespace ClinicMedical.ViewModel
 
         private void LoginExecute(object parametar)
         {
+            var passwordBox = parametar as PasswordBox;
+            var password = passwordBox.Password;
             try
             {
-                var passwordBox = parametar as PasswordBox;
-                var password = passwordBox.Password;
-
                 if (MasterLogin.Login(username, password) == true)
                 {
-                    MessageBox.Show("Successful login");
-                    MasterAdminView window = new MasterAdminView();
-                    window.Show();
-                    main.Close();
+                  
+                        MessageBox.Show("Successful login");
+                        MasterAdminView window = new MasterAdminView();
+                        window.Show();
+                        main.Close();
+                                     
                 }
-                //else if()
+                else if(MasterLogin.Login(username, password) == false)
+                {
+                    ClinicUser user = service.LoginUser(username, password);
+                    if(user != null)
+                    {
+                        if(user.RoleId==1)
+                        {
+                            if (Institution.Count == 0)
+                            {
+                                MessageBox.Show("Successful login");
+                                AddInstitutionView window = new AddInstitutionView();
+                                window.Show();
+                                main.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Successful login");
+                                AdministratorView window = new AdministratorView();
+                                window.Show();
+                                main.Close();
+                            }
+                        }
+                        else if(user.RoleId == 2)
+                        {
+
+                        }
+                        else if (user.RoleId == 3)
+                        {
+
+                        }
+                        else if (user.RoleId == 4)
+                        {
+
+                        }
+                    }
+                }
                 else
                 {
                     MessageBox.Show("Wrong user or password credentials");

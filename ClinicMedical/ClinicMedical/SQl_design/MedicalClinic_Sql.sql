@@ -75,6 +75,7 @@ create table ClinicManager(
  ClinicFloor                            int                    not null,
  MaxNumOfDoctorsSupervised              int                    not null,
  MinNumOfRoomSupervised                 int                    not null,
+ NumberOfMistake                        int                    default 0,
  Deleted                                bit                    not null
 )
 
@@ -83,7 +84,7 @@ create table ClinicDoctor(
  ClinicUserId                           int                    not null,
  FOREIGN KEY (ClinicUserId)  REFERENCES ClinicUser(ClinicUserId),
  UniqueNumber                           int           unique   not null,
- BancAccount                            int                    not null,
+ BancAccount                            int           unique   not null,
  DepartmentId                           int                    not null,
  FOREIGN KEY (DepartmentId)  REFERENCES Department(DepartmentId),
  WorkShiftId                            int                    not null,
@@ -98,11 +99,10 @@ create table ClinicPatient(
  ClinicUserId                           int                    not null,
  FOREIGN KEY (ClinicUserId)  REFERENCES ClinicUser(ClinicUserId),
  InsuranceNumber                        int                    not null,
- InsuranceExpirationDate                date                   not null,
+ InsuranceExpirationDate                date                   default getDate(),
  UniqueDoctorNumber                     int                    not null, 
  FOREIGN KEY (UniqueDoctorNumber)  REFERENCES ClinicDoctor(UniqueNumber)
 )
-
 
 Insert into Gender(Name)
 values('Female'),
