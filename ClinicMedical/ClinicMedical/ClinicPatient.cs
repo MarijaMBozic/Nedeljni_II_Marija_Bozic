@@ -17,7 +17,7 @@ namespace ClinicMedical
         public int ClinicPatientId { get; set; }
         public int ClinicUserId { get; set; }
         public int InsuranceNumber { get; set; }
-        public System.DateTime InsuranceExpirationDate { get; set; }
+        public Nullable<System.DateTime> InsuranceExpirationDate { get; set; }
         public int UniqueDoctorNumber { get; set; }
     
         public virtual ClinicUser ClinicUser { get; set; }

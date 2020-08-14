@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClinicMedical.Service
 {
@@ -16,7 +17,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     List<Gender> list = new List<Gender>();
                     list = (from p in context.Genders select p).ToList();
@@ -33,7 +34,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     List<Department> list = new List<Department>();
                     list = (from p in context.Departments select p).ToList();
@@ -50,7 +51,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     List<Workshift> list = new List<Workshift>();
                     list = (from p in context.Workshifts select p).ToList();
@@ -67,10 +68,10 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     List<ClinicUser> list = new List<ClinicUser>();
-                    list = (from p in context.ClinicUsers where p.RoleId==3 select p).ToList();
+                    list = (from p in context.ClinicUsers where p.RoleId==3 where p.IsDeleted==false select p).ToList();
                     return list;
                 }
             }
@@ -84,10 +85,10 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     List<ClinicUser> list = new List<ClinicUser>();
-                    list = (from p in context.ClinicUsers where p.RoleId == 4 select p).ToList();
+                    list = (from p in context.ClinicUsers where p.RoleId == 4 where p.IsDeleted==false select p).ToList();
                     return list;
                 }
             }
@@ -97,12 +98,11 @@ namespace ClinicMedical.Service
                 return null;
             }
         }
-
         public List<Institution> GetAllInstitution()
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     List<Institution> list = new List<Institution>();
                     list = (from p in context.Institutions select p).ToList();
@@ -119,7 +119,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
 
                     int result = (from p in context.ClinicDoctors where p.ClinicUserId == doctorId select p.UniqueNumber).FirstOrDefault();
@@ -131,30 +131,13 @@ namespace ClinicMedical.Service
                 System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
                 return 0;
             }
-        }
-        public void DeleteUser(int userId)
-        {
-            try
-            {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
-                {
-                    ClinicUser userToDelete = (from r in context.ClinicUsers where r.ClinicUserId == userId select r).First();
-                   
-                    context.ClinicUsers.Remove(userToDelete);
-                    context.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
-            }
-        }
+        }        
                 
         public int AddInstitution(Institution institution)
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     if (institution.InstitutionId == 0)
                     {
@@ -207,7 +190,7 @@ namespace ClinicMedical.Service
             string password = HashPasswordHelper.HashPassword(user.Password);
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     if (user.ClinicUserId == 0 && uniqueUserName && uniqueUserIdNumber)
                     {
@@ -218,6 +201,7 @@ namespace ClinicMedical.Service
                         newClinicUser.DateOfBirth = user.DateOfBirth;
                         newClinicUser.Citizenship = user.Citizenship;
                         newClinicUser.Username = user.Username;
+                        newClinicUser.IsDeleted = false;
                         newClinicUser.RoleId = user.RoleId;
                         newClinicUser.Password = password;
                         context.ClinicUsers.Add(newClinicUser);
@@ -234,6 +218,7 @@ namespace ClinicMedical.Service
                         editUser.DateOfBirth = user.DateOfBirth;
                         editUser.Citizenship = user.Citizenship;
                         editUser.Username = user.Username;
+                        editUser.IsDeleted = false;
                         editUser.RoleId = user.RoleId;
                         editUser.ClinicUserId = user.ClinicUserId;
                         context.SaveChanges();
@@ -253,7 +238,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     if (user.ClinicDoctorId == 0)
                     {
@@ -299,7 +284,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     if (user.ClinicManagerId == 0)
                     {
@@ -308,7 +293,6 @@ namespace ClinicMedical.Service
                         newClinicUser.ClinicFloor = user.ClinicFloor;
                         newClinicUser.MaxNumOfDoctorsSupervised = user.MaxNumOfDoctorsSupervised;
                         newClinicUser.MinNumOfRoomSupervised = user.MinNumOfRoomSupervised;
-                        newClinicUser.Deleted = false;
                         newClinicUser.NumberOfMistake = 0;
 
                         context.ClinicManagers.Add(newClinicUser);
@@ -323,7 +307,6 @@ namespace ClinicMedical.Service
                         editClinicUser.ClinicFloor = user.ClinicFloor;
                         editClinicUser.MinNumOfRoomSupervised = user.MinNumOfRoomSupervised;
                         editClinicUser.MaxNumOfDoctorsSupervised = user.MaxNumOfDoctorsSupervised;
-                        editClinicUser.Deleted = user.Deleted;
                         editClinicUser.NumberOfMistake = user.NumberOfMistake;
                         editClinicUser.ClinicManagerId = user.ClinicManagerId;
                         context.SaveChanges();
@@ -343,7 +326,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     if (user.ClinicPatientId == 0)
                     {
@@ -383,9 +366,9 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
-                    ClinicUser clinicUser = (from d in context.ClinicUsers where d.Username == username select d).FirstOrDefault();
+                    ClinicUser clinicUser = (from d in context.ClinicUsers where d.Username == username where d.IsDeleted==false select d).FirstOrDefault();
 
                     if (clinicUser != null)
                     {
@@ -408,9 +391,9 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
-                    ClinicUser clinicUser = (from d in context.ClinicUsers where d.IDNumber == IDNumber select d).FirstOrDefault();
+                    ClinicUser clinicUser = (from d in context.ClinicUsers where d.IDNumber == IDNumber where d.IsDeleted==false select d).FirstOrDefault();
 
                     if (clinicUser != null)
                     {
@@ -433,7 +416,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     ClinicDoctor clinicUser = (from d in context.ClinicDoctors where d.UniqueNumber == uniquNumber select d).FirstOrDefault();
 
@@ -457,7 +440,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     ClinicDoctor clinicUser = (from d in context.ClinicDoctors where d.BancAccount == bancAccount select d).FirstOrDefault();
 
@@ -481,7 +464,7 @@ namespace ClinicMedical.Service
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     ClinicPatient clinicUser = (from d in context.ClinicPatients where d.InsuranceNumber == insuranceNumber select d).FirstOrDefault();
 
@@ -506,11 +489,12 @@ namespace ClinicMedical.Service
             password = HashPasswordHelper.HashPassword(password);
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     ClinicUser user = (from d in context.ClinicUsers
                                          where d.Username.Equals(username)
                                          where d.Password.Equals(password)
+                                         where d.IsDeleted==false
                                          select d).FirstOrDefault();
                     return user;
                 }
@@ -522,14 +506,14 @@ namespace ClinicMedical.Service
             }
         }
 
-        public List<vwManager> GetAllvwDoctorsList()
+        public List<vwManager> GetAllvwManagersList()
         {
             try
             {
-                using (MedicaClinicEntities1 context = new MedicaClinicEntities1())
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     List<vwManager> list = new List<vwManager>();
-                    list = (from p in context.vwManagers  select p).ToList();
+                    list = (from p in context.vwManagers where p.IsDeleted==false select p).ToList();
                     return list;
                 }      
             }
@@ -538,7 +522,103 @@ namespace ClinicMedical.Service
                 System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
                 return null;
             }
+        }        
+
+        public void DeleteUser(int userId)
+        {
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    ClinicUser resultToDelete = (from r in context.ClinicUsers where r.ClinicUserId == userId select r).First();
+                    resultToDelete.IsDeleted= true;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
         }
 
+        public List<int> ListOfFreeFloors()
+        {
+            List<int> result = new List<int>();
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {                    
+                    int numOfFloors=(from p in context.Institutions where p.InstitutionId==1 select p.NumberOfFloors).FirstOrDefault();
+                    List<int> assignedFloors = (from a in context.vwManagers where a.IsDeleted==false select a.ClinicFloor).ToList();
+                    
+                    for (int i=1; i<=numOfFloors; i++)
+                    {                        
+                        if (!assignedFloors.Contains(i))
+                        {                            
+                            result.Add(i);
+                        }                            
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                return result=null;
+            }
+
+            return result;
+        }
+
+        public bool CheckMaximumNumberOfRooms(int minNumOfRooms)
+        {
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    int maxNumOfRoomPerFloor = (from d in context.Institutions where d.InstitutionId == 1 select d.NumberOfRoomsPerFloor).FirstOrDefault();
+
+                    if (minNumOfRooms > maxNumOfRoomPerFloor)
+                    {
+                        MessageBox.Show("The minimum number of rooms is higher than the maximum number of rooms per floor!");
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
+            }
+        }
+
+        public void ChackNumberOfMaintainanc()
+        {
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    Queue<ClinicUser> queueMaintainance = new Queue<ClinicUser>();
+                    foreach (ClinicUser user in context.ClinicUsers)
+                    { 
+                        if(user.RoleId==4 && user.IsDeleted==false)
+                        {
+                            queueMaintainance.Enqueue(user);
+                        }
+                    }                    
+                    if(queueMaintainance.Count>3)
+                    {
+                        queueMaintainance.Dequeue();
+                    }                    
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+            }
+        }
     }
 }

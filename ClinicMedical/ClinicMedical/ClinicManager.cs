@@ -26,7 +26,6 @@ namespace ClinicMedical
         public int MaxNumOfDoctorsSupervised { get; set; }
         public int MinNumOfRoomSupervised { get; set; }
         public Nullable<int> NumberOfMistake { get; set; }
-        public bool Deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClinicDoctor> ClinicDoctors { get; set; }

@@ -1,11 +1,11 @@
-﻿<Window x:Class="ClinicMedical.Views.AddMaintainanceView"
+﻿<Window x:Class="ClinicMedical.Views.EditManagerView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClinicMedical.Views"
         mc:Ignorable="d"
-        Title="AddMaintainanceView" Height="450" Width="800">
+        Title="EditManagerView" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -49,54 +49,60 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="15" Name="lblNewMaintainanc" Content="Add New Maintainanc:" Padding="0" HorizontalAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="15" Name="lblEditManager" Content="Edit Manager:" Padding="0" HorizontalAlignment="Center"/>
         <Label Grid.Column="1" Grid.Row="3" Name="lblFullname" Content="Fullname:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="3" Name="lblValidationFullname" Padding="0" Grid.ColumnSpan="7" Grid.RowSpan="5" HorizontalAlignment="Right"/>
-        <Label Grid.Column="9" Grid.Row="3" Grid.ColumnSpan="3" Name="lblPermisionToExpandTheClinic" Content="Permision To Expand The Clinic:" Margin="20,0,0,0" Padding="0" HorizontalAlignment="Left"/>      
+        <Label Grid.Column="9" Grid.Row="3" Grid.ColumnSpan="3" Name="lblMaxNumDoc" Content="Max num. of doctors:" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="5" Grid.Row="3" Name="lblValidationMaxNumDoc" Padding="0" Grid.ColumnSpan="7" Grid.RowSpan="5" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="5" Name="lblIDNumber" Content="IDNumber:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="5" Name="lblValidationIDNumber" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="7" Grid.Row="5" Grid.ColumnSpan="5" Name="lblResponsibleForVehicleAccessibility" Content="Responsible For Ambulance Accessibility:" Margin="80,0,0,0" Padding="0" HorizontalAlignment="Left"/>
+        <Label Grid.Column="11" Grid.Row="5" Name="lblClinicFloor" Content="Clinic Floor:" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="5" Grid.Row="5" Name="lblValidationClinicFloor" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="7" Name="lblGender" Content="Gender:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="7" Name="lblValidationGender" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="7" Grid.Row="7" Grid.ColumnSpan="5" Name="lblResponsibleForAccessibilityOfHandicaps" Content="Responsible For Accessibility Of Handicaps:" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="5" Grid.Row="7" Name="lblValidationDepartment" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="11" Grid.Row="7" Name="lblMinNumOfRoom" Content=" Min Num. Of Room:" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="5" Grid.Row="7" Name="lblValidationMinNumOfRoom" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="9" Name="lblDateOfBirth" Content="Date Of Birth:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="9" Name="lblValidationDateOfBirth" Grid.ColumnSpan="5" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Left"/>
         <Label Grid.Column="1" Grid.Row="11" Name="lblCitizenship" Content="Citizenship:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="11" Name="lblValidationCitizenship" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="13" Name="lblAdminUsername" Content="Username:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="13" Name="lblValidationAdminUsername" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Left"/>
-        <Label Grid.Column="1" Grid.Row="15" Name="lblAdminPassword" Content="Password:" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="7" Grid.Row="15" Name="lblValidationAdminPassword" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Left"/>     
+       
         <TextBox Grid.Column="3" Grid.Row="3" Name="txtFullname" Height="20" Width="100"
                  
-                 Text="{Binding User.FullName, UpdateSourceTrigger=PropertyChanged}"/>        
+                 Text="{Binding User.FullName, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="13" Grid.Row="3" Name="txtMaxNumDoc" Height="20" Width="100"
+                 
+                 Text="{Binding UserManager.MaxNumOfDoctorsSupervised, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Column="3" Grid.Row="5" Name="txtIDNumber" Height="20" Width="100"
                  
-                 Text="{Binding User.IDNumber, UpdateSourceTrigger=PropertyChanged}"/>        
+                 Text="{Binding User.IDNumber, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="13" Grid.Row="5" Name="txtClinicFloor" Height="20" Width="100"
+                 
+                 Text="{Binding UserManager.ClinicFloor, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox Grid.Column="3" Grid.Row="7" Name="cmbGender" Height="20" Width="100" 
                   DisplayMemberPath="Name" Text="Select gender" IsEditable="True"
                   ItemsSource="{Binding GenderList, UpdateSourceTrigger=PropertyChanged}"                 
                   SelectedItem="{Binding SelectedGender, UpdateSourceTrigger=PropertyChanged}"
                  />
+        <TextBox Grid.Column="13" Grid.Row="7" Name="txtMinNumOfRoom" Height="20" Width="100"
+                 
+                 Text="{Binding UserManager.MinNumOfRoomSupervised, UpdateSourceTrigger=PropertyChanged}"/>
         <DatePicker Grid.Column="3" Grid.Row="9" Name="dpDateOfBirth" Height="25" Width="100"
                   SelectedDate="{Binding User.DateOfBirth, UpdateSourceTrigger=PropertyChanged}"
                  />
-        <CheckBox Grid.Column="13" Grid.Row="3" Name="cxbPermisionToExpandTheClinic" Height="20" Width="100"                
-                  IsChecked="{Binding UserDoctor.PermisionToExpandTheClinic, UpdateSourceTrigger=PropertyChanged}"/>
-        <RadioButton Grid.Column="13" Grid.Row="5" IsChecked="{Binding ResponsibleForVehicleAccessibility}" />
-        <RadioButton Grid.Column="13" Grid.Row="7" IsChecked="{Binding ResponsibleForAccessOfHandicaps}" />
+
         <TextBox Grid.Column="3" Grid.Row="11" Name="txtCitizenship" Height="20" Width="100" 
                  
                  Text="{Binding User.Citizenship, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Column="3" Grid.Row="13" Name="txtAdminUsername" Height="20" Width="100"
                               
                  Text="{Binding User.Username, UpdateSourceTrigger=PropertyChanged}"/>
-        <PasswordBox Grid.Column="3" Grid.Row="15" Name="txtPassword" Height="20" Width="100"
-                    />
-        <Button Grid.Column="5" Grid.Row="17" Name="btnSave" Content="Add" IsEnabled="True" Height="20" 
+        
+        <Button Grid.Column="5" Grid.Row="17" Name="btnSave" Content="Submit" IsEnabled="True" Height="20" 
                 Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
-                CommandParameter="{Binding ElementName=txtPassword}"/>
+                />
         <Button Grid.Column="9" Grid.Row="17" Name="btnQuit" Content="Quit" IsEnabled="True" Height="20" 
                 Width="70" HorizontalAlignment="Left" Command="{Binding Quit, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>

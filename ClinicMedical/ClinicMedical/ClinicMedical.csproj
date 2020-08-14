@@ -120,6 +120,7 @@
     <Compile Include="ViewModel\AddManagerViewModel.cs" />
     <Compile Include="ViewModel\AddPatientViewModel.cs" />
     <Compile Include="ViewModel\AdministratorViewModel.cs" />
+    <Compile Include="ViewModel\EditManagerViewModel.cs" />
     <Compile Include="ViewModel\MaintainancViewModel.cs" />
     <Compile Include="ViewModel\ManagerViewModel.cs" />
     <Compile Include="ViewModel\MasterAdminViewModel.cs" />
@@ -145,6 +146,9 @@
     </Compile>
     <Compile Include="Views\DoctorView.xaml.cs">
       <DependentUpon>DoctorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditManagerView.xaml.cs">
+      <DependentUpon>EditManagerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InstitutionView.xaml.cs">
       <DependentUpon>InstitutionView.xaml</DependentUpon>
@@ -206,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DoctorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

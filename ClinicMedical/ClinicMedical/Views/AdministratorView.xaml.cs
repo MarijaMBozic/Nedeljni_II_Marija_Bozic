@@ -20,10 +20,10 @@ namespace ClinicMedical.Views
     /// </summary>
     public partial class AdministratorView : Window
     {
-        public AdministratorView()
+        public AdministratorView(ClinicUser user)
         {
             InitializeComponent();
-            this.DataContext = new AdministratorViewModel(this);
+            this.DataContext = new AdministratorViewModel(user, this);
         }
     }
 }

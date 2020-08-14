@@ -1,5 +1,4 @@
-﻿using ClinicMedical.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +15,13 @@ using System.Windows.Shapes;
 namespace ClinicMedical.Views
 {
     /// <summary>
-    /// Interaction logic for AddInstitutionView.xaml
+    /// Interaction logic for EditManagerView.xaml
     /// </summary>
-    public partial class AddInstitutionView : Window
+    public partial class EditManagerView : Window
     {
-        public AddInstitutionView(ClinicUser user)
+        public EditManagerView()
         {
             InitializeComponent();
-            this.DataContext = new AddInstitutionViewModel(user, this);
         }
     }
 }

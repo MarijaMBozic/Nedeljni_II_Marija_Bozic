@@ -20,10 +20,10 @@ namespace ClinicMedical.Views
     /// </summary>
     public partial class AddManagerView : Window
     {
-        public AddManagerView()
+        public AddManagerView(ClinicUser user)
         {
             InitializeComponent();
-            this.DataContext = new AddManagerViewModel(this);
+            this.DataContext = new AddManagerViewModel(user, this);
         }
     }
 }

@@ -19,10 +19,12 @@ namespace ClinicMedical.ViewModel
         ServiceCode service = new ServiceCode();
 
         #region Constructor
-        public AddManagerViewModel(AddManagerView addManagerViewOpen)
+        public AddManagerViewModel(ClinicUser userAdmin, AddManagerView addManagerViewOpen)
         {
+            this.userAdmin = userAdmin;
             addManagerView = addManagerViewOpen;
             GenderList = new ObservableCollection<Gender>(service.GetAllGender());
+            FloorList = new ObservableCollection<int>(service.ListOfFreeFloors());
             User = new ClinicUser();
             UserManager = new ClinicManager();
         }
@@ -41,6 +43,33 @@ namespace ClinicMedical.ViewModel
                 OnPropertyChanged("GenderList");
             }
         }
+        private ObservableCollection<int> floorList;
+        public ObservableCollection<int> FloorList
+        {
+            get
+            {
+                return floorList;
+            }
+            set
+            {
+                floorList = value;
+                OnPropertyChanged("FloorList");
+            }
+        }
+
+        private int selectedFloor;
+        public int SelectedFloor
+        {
+            get
+            {
+                return selectedFloor;
+            }
+            set
+            {
+                selectedFloor = value;
+                OnPropertyChanged("SelectedFloor");
+            }
+        }
 
         private Gender selectedGender;
         public Gender SelectedGender
@@ -55,6 +84,21 @@ namespace ClinicMedical.ViewModel
                 OnPropertyChanged("SelectedGender");
             }
         }
+
+        private ClinicUser userAdmin;
+        public ClinicUser UserAdmin
+        {
+            get
+            {
+                return userAdmin;
+            }
+            set
+            {
+                userAdmin = value;
+                OnPropertyChanged("UserAdmin");
+            }
+        }
+
         private ClinicUser user;
         public ClinicUser User
         {
@@ -104,17 +148,23 @@ namespace ClinicMedical.ViewModel
             var passwordBox = parametar as PasswordBox;
             var password = passwordBox.Password;
             User.Password = password;
-            User.GenderId = selectedGender.GenderId;
+            User.GenderId = SelectedGender.GenderId;
             User.RoleId = 3;
             try
             {
                 int userId = service.AddClinicUser(User);
                 if (userId != 0)
                 {
-                    UserManager.ClinicUserId = userId;                    
-                    service.AddNewManager(UserManager);
-                    MessageBox.Show("You have successfully added new manager");
-                    Logging.LoggAction("AddManagerViewModel", "Info", "Succesfull added new manager");
+                    UserManager.ClinicUserId = userId;
+                    UserManager.ClinicFloor = SelectedFloor;
+                    if (service.AddNewManager(UserManager) != 0)
+                    {
+                        MessageBox.Show("You have successfully added new manager");
+                        Logging.LoggAction("AddManagerViewModel", "Info", "Succesfull added new manager");
+                        ManagerView managerView = new ManagerView(user);
+                        managerView.Show();
+                        addManagerView.Close();                        
+                    }
                 }                
             }
             catch (Exception ex)
@@ -122,6 +172,41 @@ namespace ClinicMedical.ViewModel
                 MessageBox.Show(ex.ToString());
                 Logging.LoggAction("AddManagerViewModel", "Error", ex.ToString());
             }
+        }
+
+        
+
+        private ICommand quit;
+
+        public ICommand Quit
+        {
+            get
+            {
+                if (quit == null)
+                {
+                    quit = new RelayCommand(param => QuitExecute(), param => CanQuitExecute());
+                }
+                return quit;
+            }
+        }
+
+        public void QuitExecute()
+        {
+            try
+            {
+                ManagerView managerView = new ManagerView(user);
+                managerView.Show();
+                addManagerView.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanQuitExecute()
+        {
+            return true;
         }
         #endregion
     }

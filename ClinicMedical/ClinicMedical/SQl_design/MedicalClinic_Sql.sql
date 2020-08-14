@@ -56,7 +56,8 @@ create table ClinicUser(
    Username                    nvarchar(100)  unique  not null,
    Password                    nvarchar(100)          not null,
    RoleId                      int                    not null,
-   FOREIGN KEY (RoleId)  REFERENCES Role(RoleId)
+   FOREIGN KEY (RoleId)  REFERENCES Role(RoleId), 
+   IsDeleted                    bit                   default 0 not null
 )
 
 create table ClinicMaintenance(
@@ -75,8 +76,7 @@ create table ClinicManager(
  ClinicFloor                            int                    not null,
  MaxNumOfDoctorsSupervised              int                    not null,
  MinNumOfRoomSupervised                 int                    not null,
- NumberOfMistake                        int                    default 0,
- Deleted                                bit                    not null
+ NumberOfMistake                        int                    default 0
 )
 
 create table ClinicDoctor(

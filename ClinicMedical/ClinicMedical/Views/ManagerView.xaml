@@ -50,12 +50,14 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        <Label Grid.Column="9" Grid.Row="1" Name="btnUser" Content="User:" HorizontalAlignment="Right"/>
+        <Label Grid.Column="11" Grid.Row="1" Name="btnUserName" Content="{Binding User.FullName}" />
         <Button Grid.Column="13" Grid.Row="1" Name="btnLogOut" Content="LogOut" Width="70" Height="20"
-                Command="{Binding LogOutManager, UpdateSourceTrigger=PropertyChanged}"
+                Command="{Binding LogOut, UpdateSourceTrigger=PropertyChanged}"
                 FontWeight="Bold" HorizontalAlignment="Left"/>
-        <Button Grid.Column="9" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,5,0" Name="btnBack" Content="Back to main page" Width="130" Height="20"
-                Command="{Binding LogOutManager, UpdateSourceTrigger=PropertyChanged}"
-                FontWeight="Bold" HorizontalAlignment="Right"/>
+        <Button Grid.Column="1" Grid.Row="18" Grid.ColumnSpan="3" Margin="0,0,5,0" Name="btnBack" Content="Back to main page" Width="130" Height="20"
+                Command="{Binding BackToAdminView, UpdateSourceTrigger=PropertyChanged}"
+                FontWeight="Bold" HorizontalAlignment="Left"/>
         <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="10" Name="DataGridResults" ItemsSource="{Binding ListOFManagers, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedManager, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False" HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black" FontWeight="Bold" Grid.ColumnSpan="13">
@@ -75,7 +77,9 @@
                         <DataTemplate>
                             <StackPanel Width="150" Orientation="Horizontal">
                                 <Button Name="btnAprRequest" Content="Edit" Width="60" Height="20"
-                                         FontWeight="Bold" Margin="0" HorizontalAlignment="Right"/>
+                                         FontWeight="Bold" Margin="0" HorizontalAlignment="Right"
+                                        
+                                        />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -84,8 +88,9 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Button Name="btnDeleteRequest" Content="Delete" Width="60" Height="20" IsEnabled="{Binding IsApproved}"
-                                         FontWeight="Bold" HorizontalAlignment="Right"/>
+                                <Button Name="btnDeleteManager" Content="Delete" Width="60" Height="20"
+                                         FontWeight="Bold" HorizontalAlignment="Right"
+                                        Click="btnDeleteManager_Click"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

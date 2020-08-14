@@ -49,8 +49,10 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Button Grid.Column="13" Grid.Row="3" Name="btnLogOut" Content="LogOut" IsEnabled="true" Height="20" 
+        <Button Grid.Column="13" Grid.Row="1" Name="btnLogOut" Content="LogOut" IsEnabled="true" Height="20" 
                 Width="70" HorizontalAlignment="Left" Command="{Binding LogOut, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Column="9" Grid.Row="1" Name="btnUser" Content="User:" HorizontalAlignment="Right"/>
+        <Label Grid.Column="11" Grid.Row="1" Name="btnUserName" Content="{Binding User.FullName}" />
         <Button Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="3" Name="btnInstitution" Content="Institution" Height="50" 
                 Width="200" HorizontalAlignment="Left" Command="{Binding GoToInstitution, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="5" Grid.RowSpan="3" Name="btnManager" Content="Manager" IsEnabled="True" Height="50" 

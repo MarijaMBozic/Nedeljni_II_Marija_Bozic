@@ -96,36 +96,41 @@ namespace ClinicMedical.ViewModel
                             if (Institution.Count == 0)
                             {
                                 MessageBox.Show("Successful login");
-                                AddInstitutionView window = new AddInstitutionView();
+                                AddInstitutionView window = new AddInstitutionView(user);
                                 window.Show();
                                 main.Close();
                             }
                             else
                             {
                                 MessageBox.Show("Successful login");
-                                AdministratorView window = new AdministratorView();
+                                AdministratorView window = new AdministratorView(user);
                                 window.Show();
                                 main.Close();
                             }
                         }
                         else if(user.RoleId == 2)
                         {
-
+                            MessageBox.Show("Successful login maintainanc");
                         }
                         else if (user.RoleId == 3)
                         {
+                            MessageBox.Show("Successful login manager");
 
                         }
                         else if (user.RoleId == 4)
                         {
-
+                            MessageBox.Show("Successful login doctor");
                         }
+                        else if (user.RoleId == 5)
+                        {
+                            MessageBox.Show("Successful login patient");
+                        }                      
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Wrong user or password credentials");
-                }
+                    else
+                    {
+                        MessageBox.Show("Wrong user or password credentials");
+                    }
+                }            
 
             }
             catch (Exception ex)

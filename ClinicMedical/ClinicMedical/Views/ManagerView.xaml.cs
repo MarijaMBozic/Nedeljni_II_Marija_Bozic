@@ -20,10 +20,17 @@ namespace ClinicMedical.Views
     /// </summary>
     public partial class ManagerView : Window
     {
-        public ManagerView()
+        ManagerViewModel managerViewModel;
+        public ManagerView(ClinicUser user)
         {
             InitializeComponent();
-            this.DataContext = new ManagerViewModel(this);
+            ManagerViewModel managerViewModel = new ManagerViewModel(user, this);
+            this.DataContext = managerViewModel;
+            this.managerViewModel = managerViewModel;
+        }
+        private void btnDeleteManager_Click(object sender, RoutedEventArgs e)
+        {
+            managerViewModel.DeleteManagerExecute();
         }
     }
 }

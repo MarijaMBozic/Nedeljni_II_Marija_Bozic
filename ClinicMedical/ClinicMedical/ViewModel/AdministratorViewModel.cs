@@ -17,10 +17,26 @@ namespace ClinicMedical.ViewModel
         ServiceCode service = new ServiceCode();
 
         #region Constructor
-        public AdministratorViewModel(AdministratorView administratorViewOpen)
+        public AdministratorViewModel(ClinicUser user, AdministratorView administratorViewOpen)
         {
+            this.user = user;
             administratorView = administratorViewOpen;
 
+        }
+        #endregion
+        #region
+        private ClinicUser user;
+        public ClinicUser User
+        {
+            get
+            {
+                return user;
+            }
+            set
+            {
+                user = value;
+                OnPropertyChanged("User");
+            }
         }
         #endregion
 
@@ -144,7 +160,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                ManagerView main = new ManagerView();
+                ManagerView main = new ManagerView(user);
                 main.Show();
                 administratorView.Close();
             }

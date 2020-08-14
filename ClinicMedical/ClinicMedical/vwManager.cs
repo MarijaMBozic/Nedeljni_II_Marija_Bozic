@@ -23,6 +23,7 @@ namespace ClinicMedical
         public string Username { get; set; }
         public string Password { get; set; }
         public int RoleId { get; set; }
+        public bool IsDeleted { get; set; }
         public string GenderName { get; set; }
         public int ClinicManagerId { get; set; }
         public int Expr1 { get; set; }
@@ -30,6 +31,5 @@ namespace ClinicMedical
         public int MaxNumOfDoctorsSupervised { get; set; }
         public int MinNumOfRoomSupervised { get; set; }
         public Nullable<int> NumberOfMistake { get; set; }
-        public bool Deleted { get; set; }
     }
 }

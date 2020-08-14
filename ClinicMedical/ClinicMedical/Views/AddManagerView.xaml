@@ -79,9 +79,11 @@
         <TextBox Grid.Column="3" Grid.Row="5" Name="txtIDNumber" Height="20" Width="100"
                  
                  Text="{Binding User.IDNumber, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="13" Grid.Row="5" Name="txtClinicFloor" Height="20" Width="100"
-                 
-                 Text="{Binding UserManager.ClinicFloor, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox Grid.Column="13" Grid.Row="5" Name="cmbFloorList" Height="20" Width="100" 
+                  Text="Select floor" IsEditable="True"
+                  ItemsSource="{Binding FloorList, UpdateSourceTrigger=PropertyChanged}"                 
+                  SelectedItem="{Binding SelectedFloor, UpdateSourceTrigger=PropertyChanged}"
+                 />
         <ComboBox Grid.Column="3" Grid.Row="7" Name="cmbGender" Height="20" Width="100" 
                   DisplayMemberPath="Name" Text="Select gender" IsEditable="True"
                   ItemsSource="{Binding GenderList, UpdateSourceTrigger=PropertyChanged}"                 
