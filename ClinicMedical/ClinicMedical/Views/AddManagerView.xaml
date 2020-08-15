@@ -60,7 +60,7 @@
         <Label Grid.Column="5" Grid.Row="5" Name="lblValidationClinicFloor" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="7" Name="lblGender" Content="Gender:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="7" Name="lblValidationGender" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="11" Grid.Row="7" Name="lblMinNumOfRoom" Content=" Min Num. Of Room:" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="9" Grid.Row="7" Grid.ColumnSpan="3" Name="lblMinNumOfRoom" Content=" Min Num. Of Room:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="7" Name="lblValidationMinNumOfRoom" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="9" Name="lblDateOfBirth" Content="Date Of Birth:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="9" Name="lblValidationDateOfBirth" Grid.ColumnSpan="5" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Left"/>

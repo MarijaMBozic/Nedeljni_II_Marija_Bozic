@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicMedical.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,24 @@ namespace ClinicMedical.Views
     /// </summary>
     public partial class DoctorView : Window
     {
-        public DoctorView()
+        DoctorViewModel doctorViewModel;
+        public DoctorView(ClinicUser user)
         {
             InitializeComponent();
+
+            DoctorViewModel doctorViewModel = new DoctorViewModel(user, this);
+            this.DataContext = doctorViewModel;
+            this.doctorViewModel = doctorViewModel;
+        }
+
+        private void btnEditDoctor_Click(object sender, RoutedEventArgs e)
+        {
+            doctorViewModel.EditDoctor();
+        }
+
+        private void btnDeleteDoctor_Click(object sender, RoutedEventArgs e)
+        {
+            doctorViewModel.DeleteDoctorExecute();
         }
     }
 }

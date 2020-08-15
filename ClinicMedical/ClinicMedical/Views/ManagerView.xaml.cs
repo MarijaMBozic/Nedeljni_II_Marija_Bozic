@@ -32,5 +32,10 @@ namespace ClinicMedical.Views
         {
             managerViewModel.DeleteManagerExecute();
         }
+
+        private void btnEditManager_Click(object sender, RoutedEventArgs e)
+        {
+            managerViewModel.EditManager();
+        }
     }
 }

@@ -24,17 +24,14 @@ namespace ClinicMedical
         public string Password { get; set; }
         public int RoleId { get; set; }
         public bool IsDeleted { get; set; }
-        public string WorkshiftName { get; set; }
-        public string DepartmentNAme { get; set; }
         public int ClinicManagerId { get; set; }
         public bool InChargeOfAdmission { get; set; }
         public int WorkShiftId { get; set; }
         public int DepartmentId { get; set; }
         public int BancAccount { get; set; }
         public int UniqueNumber { get; set; }
-        public int Expr3 { get; set; }
-        public int MenagerId { get; set; }
-        public int Expr2 { get; set; }
         public int ClinicDoctorId { get; set; }
+        public string DepartmanName { get; set; }
+        public string WorkShiftName { get; set; }
     }
 }

@@ -121,18 +121,15 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwDoctor' does not have a primary
             <PropertyRef Name="Password" />
             <PropertyRef Name="RoleId" />
             <PropertyRef Name="IsDeleted" />
-            <PropertyRef Name="WorkshiftName" />
-            <PropertyRef Name="DepartmentNAme" />
             <PropertyRef Name="ClinicManagerId" />
             <PropertyRef Name="InChargeOfAdmission" />
             <PropertyRef Name="WorkShiftId" />
             <PropertyRef Name="DepartmentId" />
             <PropertyRef Name="BancAccount" />
             <PropertyRef Name="UniqueNumber" />
-            <PropertyRef Name="Expr3" />
-            <PropertyRef Name="MenagerId" />
-            <PropertyRef Name="Expr2" />
             <PropertyRef Name="ClinicDoctorId" />
+            <PropertyRef Name="DepartmanName" />
+            <PropertyRef Name="WorkShiftName" />
           </Key>
           <Property Name="ClinicUserId" Type="int" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -144,18 +141,15 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwDoctor' does not have a primary
           <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="WorkshiftName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="DepartmentNAme" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ClinicManagerId" Type="int" Nullable="false" />
           <Property Name="InChargeOfAdmission" Type="bit" Nullable="false" />
           <Property Name="WorkShiftId" Type="int" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="BancAccount" Type="int" Nullable="false" />
           <Property Name="UniqueNumber" Type="int" Nullable="false" />
-          <Property Name="Expr3" Type="int" Nullable="false" />
-          <Property Name="MenagerId" Type="int" Nullable="false" />
-          <Property Name="Expr2" Type="int" Nullable="false" />
           <Property Name="ClinicDoctorId" Type="int" Nullable="false" />
+          <Property Name="DepartmanName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="WorkShiftName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MedicaClinic.dbo.vwMaintenance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -400,18 +394,15 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__09946309' has columns that
     [vwDoctor].[Password] AS [Password], 
     [vwDoctor].[RoleId] AS [RoleId], 
     [vwDoctor].[IsDeleted] AS [IsDeleted], 
-    [vwDoctor].[WorkshiftName] AS [WorkshiftName], 
-    [vwDoctor].[DepartmentNAme] AS [DepartmentNAme], 
     [vwDoctor].[ClinicManagerId] AS [ClinicManagerId], 
     [vwDoctor].[InChargeOfAdmission] AS [InChargeOfAdmission], 
     [vwDoctor].[WorkShiftId] AS [WorkShiftId], 
     [vwDoctor].[DepartmentId] AS [DepartmentId], 
     [vwDoctor].[BancAccount] AS [BancAccount], 
     [vwDoctor].[UniqueNumber] AS [UniqueNumber], 
-    [vwDoctor].[Expr3] AS [Expr3], 
-    [vwDoctor].[MenagerId] AS [MenagerId], 
-    [vwDoctor].[Expr2] AS [Expr2], 
-    [vwDoctor].[ClinicDoctorId] AS [ClinicDoctorId]
+    [vwDoctor].[ClinicDoctorId] AS [ClinicDoctorId], 
+    [vwDoctor].[DepartmanName] AS [DepartmanName], 
+    [vwDoctor].[WorkShiftName] AS [WorkShiftName]
     FROM [dbo].[vwDoctor] AS [vwDoctor]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwMaintenance" EntityType="Self.vwMaintenance" store:Type="Views" store:Schema="dbo">
@@ -648,18 +639,15 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__09946309' has columns that
             <PropertyRef Name="Password" />
             <PropertyRef Name="RoleId" />
             <PropertyRef Name="IsDeleted" />
-            <PropertyRef Name="WorkshiftName" />
-            <PropertyRef Name="DepartmentNAme" />
             <PropertyRef Name="ClinicManagerId" />
             <PropertyRef Name="InChargeOfAdmission" />
             <PropertyRef Name="WorkShiftId" />
             <PropertyRef Name="DepartmentId" />
             <PropertyRef Name="BancAccount" />
             <PropertyRef Name="UniqueNumber" />
-            <PropertyRef Name="Expr3" />
-            <PropertyRef Name="MenagerId" />
-            <PropertyRef Name="Expr2" />
             <PropertyRef Name="ClinicDoctorId" />
+            <PropertyRef Name="DepartmanName" />
+            <PropertyRef Name="WorkShiftName" />
           </Key>
           <Property Name="ClinicUserId" Type="Int32" Nullable="false" />
           <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
@@ -671,18 +659,15 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__09946309' has columns that
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="WorkshiftName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DepartmentNAme" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClinicManagerId" Type="Int32" Nullable="false" />
           <Property Name="InChargeOfAdmission" Type="Boolean" Nullable="false" />
           <Property Name="WorkShiftId" Type="Int32" Nullable="false" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <Property Name="BancAccount" Type="Int32" Nullable="false" />
           <Property Name="UniqueNumber" Type="Int32" Nullable="false" />
-          <Property Name="Expr3" Type="Int32" Nullable="false" />
-          <Property Name="MenagerId" Type="Int32" Nullable="false" />
-          <Property Name="Expr2" Type="Int32" Nullable="false" />
           <Property Name="ClinicDoctorId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmanName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WorkShiftName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="vwMaintenance">
           <Key>
@@ -1079,18 +1064,15 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__09946309' has columns that
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="WorkshiftName" ColumnName="WorkshiftName" />
-                <ScalarProperty Name="DepartmentNAme" ColumnName="DepartmentNAme" />
                 <ScalarProperty Name="ClinicManagerId" ColumnName="ClinicManagerId" />
                 <ScalarProperty Name="InChargeOfAdmission" ColumnName="InChargeOfAdmission" />
                 <ScalarProperty Name="WorkShiftId" ColumnName="WorkShiftId" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="BancAccount" ColumnName="BancAccount" />
                 <ScalarProperty Name="UniqueNumber" ColumnName="UniqueNumber" />
-                <ScalarProperty Name="Expr3" ColumnName="Expr3" />
-                <ScalarProperty Name="MenagerId" ColumnName="MenagerId" />
-                <ScalarProperty Name="Expr2" ColumnName="Expr2" />
                 <ScalarProperty Name="ClinicDoctorId" ColumnName="ClinicDoctorId" />
+                <ScalarProperty Name="DepartmanName" ColumnName="DepartmanName" />
+                <ScalarProperty Name="WorkShiftName" ColumnName="WorkShiftName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

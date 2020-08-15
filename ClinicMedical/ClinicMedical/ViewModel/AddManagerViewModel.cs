@@ -19,14 +19,16 @@ namespace ClinicMedical.ViewModel
         ServiceCode service = new ServiceCode();
 
         #region Constructor
-        public AddManagerViewModel(ClinicUser userAdmin, AddManagerView addManagerViewOpen)
+        public AddManagerViewModel(ClinicUser userAdmin, ClinicUser user, ClinicManager clinicManager, AddManagerView addManagerViewOpen)
         {
             this.userAdmin = userAdmin;
+            this.userManager = clinicManager;
+            this.user = user;
             addManagerView = addManagerViewOpen;
-            GenderList = new ObservableCollection<Gender>(service.GetAllGender());
+            GenderList = new ObservableCollection<Gender>(service.GetAllGender());       
+            SelectedGender = GenderList.FirstOrDefault(p => p.GenderId == user.GenderId);
             FloorList = new ObservableCollection<int>(service.ListOfFreeFloors());
-            User = new ClinicUser();
-            UserManager = new ClinicManager();
+            SelectedFloor = FloorList.FirstOrDefault(p => p.Equals(userManager.ClinicFloor));
         }
         #endregion
         #region Properties
@@ -161,7 +163,7 @@ namespace ClinicMedical.ViewModel
                     {
                         MessageBox.Show("You have successfully added new manager");
                         Logging.LoggAction("AddManagerViewModel", "Info", "Succesfull added new manager");
-                        ManagerView managerView = new ManagerView(user);
+                        ManagerView managerView = new ManagerView(UserAdmin);
                         managerView.Show();
                         addManagerView.Close();                        
                     }

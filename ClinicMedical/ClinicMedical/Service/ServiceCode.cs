@@ -64,14 +64,14 @@ namespace ClinicMedical.Service
                 return null;
             }
         }
-        public List<ClinicUser> GetAllManager()
+        public List<vwManager> GetAllManager()
         {
             try
             {
                 using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
-                    List<ClinicUser> list = new List<ClinicUser>();
-                    list = (from p in context.ClinicUsers where p.RoleId==3 where p.IsDeleted==false select p).ToList();
+                    List<vwManager> list = new List<vwManager>();
+                    list = (from p in context.vwManagers where p.IsDeleted==false select p).ToList();
                     return list;
                 }
             }
@@ -319,7 +319,6 @@ namespace ClinicMedical.Service
                 return 0;
             }
         }
-
 
         public int AddNewManager(ClinicManager user)
         {
@@ -573,6 +572,24 @@ namespace ClinicMedical.Service
                 {
                     List<vwMaintenance> list = new List<vwMaintenance>();
                     list = (from p in context.vwMaintenances where p.IsDeleted == false select p).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        public List<vwDoctor> GetAllvwDoctorsList()
+        {
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    List<vwDoctor> list = new List<vwDoctor>();
+                    list = (from p in context.vwDoctors where p.IsDeleted == false select p).ToList();
                     return list;
                 }
             }

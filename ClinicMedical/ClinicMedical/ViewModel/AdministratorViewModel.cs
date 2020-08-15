@@ -193,7 +193,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                DoctorView main = new DoctorView();
+                DoctorView main = new DoctorView(user);
                 main.Show();
                 administratorView.Close();
             }

@@ -74,7 +74,7 @@
                 <DataGridTextColumn Header="Gender" Binding="{Binding GenderId,  Converter={StaticResource GenderIDToNameConverter}}"/>
                 <DataGridTextColumn Header="Citizenship " Binding="{Binding Citizenship}" Width="80"/>
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="100"/>
-                <DataGridTextColumn Header=" Permission for expanding" Binding="{Binding  PermissionToExpandClinic}" Width="130"/>
+                <DataGridTextColumn Header="Permission for expanding" Binding="{Binding  PermissionToExpandClinic}" Width="130"/>
                 <DataGridTextColumn Header="Responsible for Ambulance Accessibility" Binding="{Binding ResponsibleForVehicleAccessibility}" Width="60"/>
                 <DataGridTextColumn Header="Responsible for Access Of Handicaps" Binding="{Binding ResponsibleForAccessOfHandicaps}" Width="50"/>
                 <DataGridTemplateColumn Header="Edit" Width="60" >
@@ -94,7 +94,7 @@
                         <DataTemplate>
                             <StackPanel>
                                 <Button Name="btnDeleteMaintenance" Content="Delete" Width="60" Height="20"
-                                         FontWeight="Bold" HorizontalAlignment="Right"
+                                        FontWeight="Bold" HorizontalAlignment="Right"
                                         Click="btnDeleteMaintenance_Click"
                                         />
                             </StackPanel>

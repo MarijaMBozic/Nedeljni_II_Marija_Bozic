@@ -19,11 +19,11 @@ namespace ClinicMedical.Views
     /// Interaction logic for AddDoctorView.xaml
     /// </summary>
     public partial class AddDoctorView : Window
-    {
-        public AddDoctorView()
+    {       
+        public AddDoctorView(ClinicUser adminUser, ClinicUser user, ClinicDoctor doctor)
         {
             InitializeComponent();
-            this.DataContext = new AddDoctorViewModel(this);
+            this.DataContext = new AddDoctorViewModel(adminUser, user, doctor, this);
         }
     }
 }

@@ -17,17 +17,27 @@ namespace ClinicMedical.ViewModel
     {
         AddDoctorView addDoctorView;
         ServiceCode service = new ServiceCode();
-
+         
+        //    GenderList = new ObservableCollection<Gender>(service.GetAllGender());
+        //    SelectedGender = GenderList.FirstOrDefault(p => p.GenderId == user.GenderId);
+        //    FloorList = new ObservableCollection<int>(service.ListOfFreeFloors());
+        //    SelectedFloor = FloorList.FirstOrDefault(p => p.Equals(userManager.ClinicFloor));
+   
         #region Constructor
-        public AddDoctorViewModel(AddDoctorView addDoctorViewOpen)
+        public AddDoctorViewModel(ClinicUser userAdmin, ClinicUser user, ClinicDoctor clinicDoctor,  AddDoctorView addDoctorViewOpen)
         {
+            this.userAdmin = userAdmin;
+            this.userDoctor = clinicDoctor;
+            this.user = user;
             addDoctorView = addDoctorViewOpen;
             GenderList = new ObservableCollection<Gender>(service.GetAllGender());
+            SelectedGender = GenderList.FirstOrDefault(p => p.GenderId == user.GenderId);
             DepartmentList = new ObservableCollection<Department>(service.GetAllDepartment());
-            WorkShiftList= new ObservableCollection<Workshift>(service.GetAllWorkshift());
-            ManagerList = new ObservableCollection<ClinicUser>(service.GetAllManager());
-            User = new ClinicUser();
-            UserDoctor = new ClinicDoctor();
+            SelectedDepartment = DepartmentList.FirstOrDefault(p => p.DepartmentId == userDoctor.DepartmentId);
+            WorkShiftList = new ObservableCollection<Workshift>(service.GetAllWorkshift());
+            SelectedWorkShift = WorkShiftList.FirstOrDefault(p => p.WorkShiftId == userDoctor.WorkShiftId);
+            ManagerList = new ObservableCollection<vwManager>(service.GetAllManager());
+           
         }
         #endregion
         #region Properties
@@ -115,8 +125,8 @@ namespace ClinicMedical.ViewModel
             }
         }
 
-        private ObservableCollection<ClinicUser> managerList;
-        public ObservableCollection<ClinicUser> ManagerList
+        private ObservableCollection<vwManager> managerList;
+        public ObservableCollection<vwManager> ManagerList
         {
             get
             {
@@ -129,8 +139,8 @@ namespace ClinicMedical.ViewModel
             }
         }
 
-        private ClinicUser selectedManager;
-        public ClinicUser SelectedManager
+        private vwManager selectedManager;
+        public vwManager SelectedManager
         {
             get
             {
@@ -170,6 +180,21 @@ namespace ClinicMedical.ViewModel
                 OnPropertyChanged("UserDoctor");
             }
         }
+
+        private ClinicUser userAdmin;
+        public ClinicUser UserAdmin
+        {
+            get
+            {
+                return userAdmin;
+            }
+            set
+            {
+                userAdmin = value;
+                OnPropertyChanged("UserAdmin");
+            }
+        }
+
         #endregion
         #region Commands
         private ICommand save;
@@ -185,7 +210,6 @@ namespace ClinicMedical.ViewModel
                 return save;
             }
         }
-
         public void SaveExecute(object parametar)
         {
             var passwordBox = parametar as PasswordBox;
@@ -195,23 +219,52 @@ namespace ClinicMedical.ViewModel
             User.RoleId =4;
             try
             {
-                bool uniqueNumber =service.CheckUniqueNumber(UserDoctor.UniqueNumber);
-                bool uniqueBancAccount = service.CheckBancAccount(UserDoctor.BancAccount);
-                if (uniqueNumber && uniqueBancAccount)
+                if (User.ClinicUserId == 0)
                 {
+                    bool uniqueNumber = service.CheckUniqueNumber(UserDoctor.UniqueNumber);
+                    bool uniqueBancAccount = service.CheckBancAccount(UserDoctor.BancAccount);
+                    if (uniqueNumber && uniqueBancAccount)
+                    {
+                        int userId = service.AddClinicUser(User);
+                        if (userId != 0)
+                        {
+                            UserDoctor.ClinicUserId = userId;
+                            UserDoctor.DepartmentId = selectedDepartment.DepartmentId;
+                            UserDoctor.WorkShiftId = selectedWorkShift.WorkShiftId;
+                            UserDoctor.ClinicManagerId = selectedManager.ClinicManagerId;
+
+                            if (service.AddNewDoctor(UserDoctor) != 0)
+                            {
+                                MessageBox.Show("You have successfully added new doctor");
+                                Logging.LoggAction("AddDoctorViewModel", "Info", "Succesfull added new doctor");
+
+                                DoctorView doctorView = new DoctorView(UserAdmin);
+                                doctorView.Show();
+                                addDoctorView.Close();
+                            }
+                        }
+                    }
+                }
+                else { 
                     int userId = service.AddClinicUser(User);
                     if (userId != 0)
                     {
                         UserDoctor.ClinicUserId = userId;
                         UserDoctor.DepartmentId = selectedDepartment.DepartmentId;
                         UserDoctor.WorkShiftId = selectedWorkShift.WorkShiftId;
-                        UserDoctor.ClinicManagerId = selectedManager.ClinicUserId;
+                        UserDoctor.ClinicManagerId = selectedManager.ClinicManagerId;
 
-                        service.AddNewDoctor(UserDoctor);
-                        MessageBox.Show("You have successfully added new doctor");
-                        Logging.LoggAction("AddDoctorViewModel", "Info", "Succesfull added new doctor");
+                        if (service.AddNewDoctor(UserDoctor) != 0)
+                        {
+                            MessageBox.Show("You have successfully added new doctor");
+                            Logging.LoggAction("AddDoctorViewModel", "Info", "Succesfull added new doctor");
+
+                            DoctorView doctorView = new DoctorView(UserAdmin);
+                            doctorView.Show();
+                            addDoctorView.Close();
+                        }
                     }
-                }              
+                }
             }
             catch (Exception ex)
             {
@@ -219,6 +272,39 @@ namespace ClinicMedical.ViewModel
                 Logging.LoggAction("AddDoctorViewModel", "Error", ex.ToString());
             }
         }
-            #endregion
+
+        private ICommand quit;
+
+        public ICommand Quit
+        {
+            get
+            {
+                if (quit == null)
+                {
+                    quit = new RelayCommand(param => QuitExecute(), param => CanQuitExecute());
+                }
+                return quit;
+            }
+        }
+
+        public void QuitExecute()
+        {
+            try
+            {
+                DoctorView doctorView = new DoctorView(UserAdmin);
+                doctorView.Show();
+                addDoctorView.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanQuitExecute()
+        {
+            return true;
+        }
+        #endregion
     }
 }

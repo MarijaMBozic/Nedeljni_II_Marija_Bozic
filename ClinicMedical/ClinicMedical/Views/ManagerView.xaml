@@ -12,7 +12,7 @@
             <converters:GenderIDToNameConverter x:Key="GenderIDToNameConverter" />
         </ResourceDictionary>
     </Window.Resources>
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -82,9 +82,9 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Width="150" Orientation="Horizontal">
-                                <Button Name="btnAprRequest" Content="Edit" Width="60" Height="20"
+                                <Button Name="btnEditManager" Content="Edit" Width="60" Height="20"
                                          FontWeight="Bold" Margin="0" HorizontalAlignment="Right"
-                                        
+                                        Click="btnEditManager_Click"
                                         />
                             </StackPanel>
                         </DataTemplate>
@@ -103,8 +103,8 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="1" Grid.Row="1" Name="btnAddNewMenager" Content="Add new menager" Width="130" Height="20"
+        <Button Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Name="btnAddNewMenager" Content="Add new menager" Width="130" Height="20"
                 Command="{Binding AddNewMenager, UpdateSourceTrigger=PropertyChanged}"
-                FontWeight="Bold" HorizontalAlignment="Center"/>
+                FontWeight="Bold" HorizontalAlignment="Left"/>
     </Grid>
 </Window>

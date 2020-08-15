@@ -12,18 +12,17 @@ using System.Windows.Input;
 
 namespace ClinicMedical.ViewModel
 {
-    public class ManagerViewModel:ViewModelBase
+    public class DoctorViewModel:ViewModelBase
     {
         ServiceCode service = new ServiceCode();
+        DoctorView doctorView;
 
-        ManagerView managerView;
         #region Constructor
-
-        public ManagerViewModel(ClinicUser user, ManagerView managerViewOpend)
+        public DoctorViewModel(ClinicUser user, DoctorView doctorViewOpen)
         {
             this.user = user;
-            managerView = managerViewOpend;
-            ListOFManagers = new ObservableCollection<vwManager>(service.GetAllvwManagersList());
+            doctorView = doctorViewOpen;
+            ListOfDoctors = new ObservableCollection<vwDoctor>(service.GetAllvwDoctorsList());
         }
         #endregion
 
@@ -43,35 +42,35 @@ namespace ClinicMedical.ViewModel
             }
         }
 
-        private ObservableCollection<vwManager> listOFManagers;
-        public ObservableCollection<vwManager> ListOFManagers
+        private ObservableCollection<vwDoctor> listOfDoctors;
+        public ObservableCollection<vwDoctor> ListOfDoctors
         {
             get
             {
-                return listOFManagers;
+                return listOfDoctors;
             }
             set
             {
-                listOFManagers = value;
-                OnPropertyChanged("ListOFManagers");
+                listOfDoctors = value;
+                OnPropertyChanged("ListOfDoctors");
             }
         }
 
-        private vwManager selectedManager = new vwManager();
-        public vwManager SelectedManager
+        private vwDoctor selectedDoctor = new vwDoctor();
+        public vwDoctor SelectedDoctor
         {
             get
             {
-                return selectedManager;
+                return selectedDoctor;
             }
             set
             {
-                selectedManager = value;
-                OnPropertyChanged("SelectedManager");
+                selectedDoctor = value;
+                OnPropertyChanged("SelectedDoctor");
             }
         }
-
         #endregion
+
         #region Commands        
 
         private ICommand logOut;
@@ -94,7 +93,7 @@ namespace ClinicMedical.ViewModel
             {
                 MainWindow main = new MainWindow();
                 main.Show();
-                managerView.Close();
+                doctorView.Close();
                 MessageBox.Show("You have successfully logged out");
             }
             catch (Exception ex)
@@ -128,7 +127,7 @@ namespace ClinicMedical.ViewModel
             {
                 AdministratorView adminView = new AdministratorView(user);
                 adminView.Show();
-                managerView.Close();               
+                doctorView.Close();
             }
             catch (Exception ex)
             {
@@ -141,27 +140,27 @@ namespace ClinicMedical.ViewModel
             return true;
         }
 
-        private ICommand addNewMenager;
+        private ICommand addNewDoctor;
 
-        public ICommand AddNewMenager
+        public ICommand AddNewDoctor
         {
             get
             {
-                if (addNewMenager == null)
+                if (addNewDoctor == null)
                 {
-                    addNewMenager = new RelayCommand(param => AddNewMenagerExecute(), param => CanAddNewMenagerExecute());
+                    addNewDoctor = new RelayCommand(param => AddNewDoctorExecute(), param => CanAddNewDoctorExecute());
                 }
-                return addNewMenager;
+                return addNewDoctor;
             }
         }
 
-        public void AddNewMenagerExecute()
+        public void AddNewDoctorExecute()
         {
             try
-            {               
-                AddManagerView addManagerView = new AddManagerView(User, new ClinicUser(), new ClinicManager());
-                addManagerView.Show();
-                managerView.Close();
+            {
+                AddDoctorView addDoctorView = new AddDoctorView(User, new ClinicUser(), new ClinicDoctor());
+                addDoctorView.Show();
+                doctorView.Close();
             }
             catch (Exception ex)
             {
@@ -169,49 +168,38 @@ namespace ClinicMedical.ViewModel
             }
         }
 
-        private bool CanAddNewMenagerExecute()
+        private bool CanAddNewDoctorExecute()
         {
             return true;
         }
 
-        public void DeleteManagerExecute()
-        {
-            try
-            {
-                service.DeleteUser(selectedManager.ClinicUserId);
-                ListOFManagers = new ObservableCollection<vwManager>(service.GetAllvwManagersList());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        public void EditManager()
+        public void EditDoctor()
         {
             try
             {
                 ClinicUser clinicUser = new ClinicUser();
-                clinicUser.ClinicUserId = selectedManager.ClinicUserId;
-                clinicUser.FullName = selectedManager.FullName;
-                clinicUser.DateOfBirth = selectedManager.DateOfBirth;
-                clinicUser.IDNumber = selectedManager.IDNumber;
-                clinicUser.GenderId = selectedManager.GenderId;
-                clinicUser.Citizenship = selectedManager.Citizenship;
-                clinicUser.Username = selectedManager.Username;
-                clinicUser.Password = selectedManager.Password;
+                clinicUser.ClinicUserId = selectedDoctor.ClinicUserId;
+                clinicUser.FullName = selectedDoctor.FullName;
+                clinicUser.DateOfBirth = selectedDoctor.DateOfBirth;
+                clinicUser.IDNumber = selectedDoctor.IDNumber;
+                clinicUser.GenderId = selectedDoctor.GenderId;
+                clinicUser.Citizenship = selectedDoctor.Citizenship;
+                clinicUser.Username = selectedDoctor.Username;
+                clinicUser.Password = selectedDoctor.Password;
 
-                ClinicManager clinicManager = new ClinicManager();
-                clinicManager.ClinicManagerId = selectedManager.ClinicManagerId;
-                clinicManager.ClinicUserId = selectedManager.ClinicUserId;
-                clinicManager.ClinicFloor = selectedManager.ClinicFloor;
-                clinicManager.MaxNumOfDoctorsSupervised = selectedManager.MaxNumOfDoctorsSupervised;
-                clinicManager.MinNumOfRoomSupervised = selectedManager.MinNumOfRoomSupervised;
-                clinicManager.NumberOfMistake = selectedManager.NumberOfMistake;
+                ClinicDoctor clinicDoctor = new ClinicDoctor();
+                clinicDoctor.ClinicDoctorId = selectedDoctor.ClinicDoctorId;
+                clinicDoctor.ClinicUserId = selectedDoctor.ClinicUserId;
+                clinicDoctor.UniqueNumber = selectedDoctor.UniqueNumber;
+                clinicDoctor.BancAccount = selectedDoctor.BancAccount;
+                clinicDoctor.DepartmentId = selectedDoctor.DepartmentId;
+                clinicDoctor.WorkShiftId = selectedDoctor.WorkShiftId;
+                clinicDoctor.InChargeOfAdmission = selectedDoctor.InChargeOfAdmission;
+                clinicDoctor.ClinicManagerId = selectedDoctor.ClinicManagerId;
 
-                AddManagerView addManagerView = new AddManagerView(User, clinicUser, clinicManager);
-                addManagerView.Show();
-                managerView.Close();
+                AddDoctorView addDoctorView = new AddDoctorView(User, clinicUser, clinicDoctor);
+                addDoctorView.Show();
+                doctorView.Close();
             }
             catch (Exception ex)
             {
@@ -219,6 +207,19 @@ namespace ClinicMedical.ViewModel
             }
         }
 
+        public void DeleteDoctorExecute()
+        {
+            try
+            {
+                service.DeleteUser(selectedDoctor.ClinicUserId);
+                ListOfDoctors = new ObservableCollection<vwDoctor>(service.GetAllvwDoctorsList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
         #endregion
+
     }
 }
