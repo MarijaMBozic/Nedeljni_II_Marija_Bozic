@@ -81,3 +81,73 @@ The statement has been terminated.
 [14/08/2020 14:47:22][MasterAminViewModel][Info][Succesfull added new Administrator] 
 [14/08/2020 15:00:30][AddManagerViewModel][Info][Succesfull added new manager] 
 [14/08/2020 15:15:07][AddManagerViewModel][Info][Succesfull added new manager] 
+[15/08/2020 10:29:32][MasterAminViewModel][Info][Succesfull added new Administrator] 
+[15/08/2020 10:30:34][AddInstitutionViewModel][Info][Succesfull added new Institution] 
+[15/08/2020 10:31:31][AddManagerViewModel][Info][Succesfull added new manager] 
+[15/08/2020 10:59:32][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 10:59:55][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:00:15][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:02:16][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:02:39][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:04:41][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:09:25][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:10:30][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:12:13][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:13:33][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:47:39][MasterAminViewModel][Info][Succesfull added new Administrator] 
+[15/08/2020 11:48:26][AddInstitutionViewModel][Info][Succesfull added new Institution] 
+[15/08/2020 11:48:57][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:49:24][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:49:50][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:50:21][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:51:41][MasterAminViewModel][Error][System.InvalidOperationException: Sequence contains no elements
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__0[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.First[TSource](IQueryable`1 source)
+   at ClinicMedical.Service.ServiceCode.AddClinicUser(ClinicUser user) in C:\Users\milan\Desktop\Nedeljni_II_Marija_Bozic\ClinicMedical\ClinicMedical\Service\ServiceCode.cs:line 214] 
+[15/08/2020 11:51:47][MasterAminViewModel][Error][System.InvalidOperationException: Sequence contains no elements
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__0[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.First[TSource](IQueryable`1 source)
+   at ClinicMedical.Service.ServiceCode.AddClinicUser(ClinicUser user) in C:\Users\milan\Desktop\Nedeljni_II_Marija_Bozic\ClinicMedical\ClinicMedical\Service\ServiceCode.cs:line 214] 
+[15/08/2020 11:52:52][MasterAminViewModel][Error][System.InvalidOperationException: Sequence contains no elements
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__0[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.First[TSource](IQueryable`1 source)
+   at ClinicMedical.Service.ServiceCode.AddClinicUser(ClinicUser user) in C:\Users\milan\Desktop\Nedeljni_II_Marija_Bozic\ClinicMedical\ClinicMedical\Service\ServiceCode.cs:line 214] 
+[15/08/2020 11:55:09][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 11:57:57][MasterAminViewModel][Info][Succesfull added new Administrator] 
+[15/08/2020 11:58:41][AddInstitutionViewModel][Info][Succesfull added new Institution] 
+[15/08/2020 11:59:18][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:00:03][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:00:40][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:02:11][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:13:58][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:16:23][MasterAminViewModel][Info][Succesfull added new Administrator] 
+[15/08/2020 12:16:58][AddInstitutionViewModel][Info][Succesfull added new Institution] 
+[15/08/2020 12:17:42][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:18:13][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:18:42][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:20:04][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:22:15][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 12:33:33][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 13:22:46][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 13:23:49][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 14:17:32][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 14:27:41][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 14:29:08][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 14:50:48][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 14:54:39][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 15:00:54][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 15:01:59][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 15:05:36][AddMaintainanceViewModel][Info][Succesfull added new doctor] 
+[15/08/2020 15:06:08][AddMaintainanceViewModel][Info][Succesfull added new doctor] 

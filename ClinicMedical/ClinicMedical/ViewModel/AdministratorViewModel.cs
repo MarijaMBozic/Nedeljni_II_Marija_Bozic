@@ -127,7 +127,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                MaintainancView main = new MaintainancView();
+                MaintainancView main = new MaintainancView(user);
                 main.Show();
                 administratorView.Close();
             }

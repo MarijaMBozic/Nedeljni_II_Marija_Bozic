@@ -12,7 +12,7 @@ namespace ClinicMedical
     using System;
     using System.Collections.Generic;
     
-    public partial class veDoctor
+    public partial class vwPatient
     {
         public int ClinicUserId { get; set; }
         public string FullName { get; set; }
@@ -23,13 +23,12 @@ namespace ClinicMedical
         public string Username { get; set; }
         public string Password { get; set; }
         public int RoleId { get; set; }
+        public bool IsDeleted { get; set; }
+        public int InsuranceNumber { get; set; }
+        public Nullable<System.DateTime> InsuranceExpirationDate { get; set; }
+        public int UniqueDoctorNumber { get; set; }
         public string GenderName { get; set; }
-        public int UniqueNumber { get; set; }
-        public int BancAccount { get; set; }
-        public int ClinicDoctorId { get; set; }
-        public int DepartmentId { get; set; }
-        public bool InChargeOfAdmission { get; set; }
-        public int WorkShiftId { get; set; }
-        public int ClinicManagerId { get; set; }
+        public int DrUniquNumber { get; set; }
+        public int ClinicPatientId { get; set; }
     }
 }

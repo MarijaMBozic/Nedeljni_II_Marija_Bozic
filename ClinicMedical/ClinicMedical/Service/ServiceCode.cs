@@ -280,6 +280,47 @@ namespace ClinicMedical.Service
             }
         }
 
+        public int AddNewMaintainance(ClinicMaintenance user)
+        {
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    if (user.ClinicMaintenanceId == 0)
+                    {
+                        ClinicMaintenance newClinicUser = new ClinicMaintenance();
+                        newClinicUser.ClinicUserId = user.ClinicUserId;
+                        newClinicUser.PermissionToExpandClinic = user.PermissionToExpandClinic;
+                        newClinicUser.ResponsibleForAccessOfHandicaps = user.ResponsibleForAccessOfHandicaps;
+                        newClinicUser.ResponsibleForVehicleAccessibility = user.ResponsibleForAccessOfHandicaps;
+                        
+                        context.ClinicMaintenances.Add(newClinicUser);
+                        context.SaveChanges();
+                        user.ClinicMaintenanceId = newClinicUser.ClinicMaintenanceId;
+                        return user.ClinicMaintenanceId;
+                    }
+                    else
+                    {
+                        ClinicMaintenance editClinicUser = (from p in context.ClinicMaintenances where p.ClinicMaintenanceId == user.ClinicMaintenanceId select p).First();
+                        editClinicUser.ClinicUserId = user.ClinicUserId;
+                        editClinicUser.PermissionToExpandClinic= user.PermissionToExpandClinic;
+                        editClinicUser.ResponsibleForAccessOfHandicaps = user.ResponsibleForAccessOfHandicaps;
+                        editClinicUser.ResponsibleForVehicleAccessibility = user.ResponsibleForVehicleAccessibility;
+                        editClinicUser.ClinicMaintenanceId = user.ClinicMaintenanceId;
+                        context.SaveChanges();
+                        return user.ClinicMaintenanceId;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                Logging.LoggAction("AddManagerViweModel", "Error", ex.ToString());
+                return 0;
+            }
+        }
+
+
         public int AddNewManager(ClinicManager user)
         {
             try
@@ -522,7 +563,25 @@ namespace ClinicMedical.Service
                 System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
                 return null;
             }
-        }        
+        }
+
+        public List<vwMaintenance> GetAllvwMaintainancList()
+        {
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    List<vwMaintenance> list = new List<vwMaintenance>();
+                    list = (from p in context.vwMaintenances where p.IsDeleted == false select p).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                return null;
+            }
+        }
 
         public void DeleteUser(int userId)
         {
@@ -604,20 +663,22 @@ namespace ClinicMedical.Service
                     Queue<ClinicUser> queueMaintainance = new Queue<ClinicUser>();
                     foreach (ClinicUser user in context.ClinicUsers)
                     { 
-                        if(user.RoleId==4 && user.IsDeleted==false)
+                        if(user.RoleId==2 && user.IsDeleted==false)
                         {
                             queueMaintainance.Enqueue(user);
                         }
                     }                    
                     if(queueMaintainance.Count>3)
                     {
-                        queueMaintainance.Dequeue();
+                       ClinicUser deletedUser=queueMaintainance.Dequeue();
+                        DeleteUser(deletedUser.ClinicUserId);
+                        context.SaveChanges();
                     }                    
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                System.Diagnostics.Debug.WriteLine("Exep tion" + ex.Message.ToString());
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicMedical.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace ClinicMedical.Views
     /// </summary>
     public partial class AddMaintainanceView : Window
     {
-        public AddMaintainanceView()
+        public AddMaintainanceView(ClinicUser adminUser, ClinicUser user, ClinicMaintenance maintenance)
         {
             InitializeComponent();
+            this.DataContext = new AddMaintainancViewModel(adminUser, user, maintenance, this);
         }
     }
 }

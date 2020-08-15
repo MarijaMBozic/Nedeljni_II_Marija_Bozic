@@ -75,7 +75,8 @@
                  
                  Text="{Binding User.IDNumber, UpdateSourceTrigger=PropertyChanged}"/>        
         <ComboBox Grid.Column="3" Grid.Row="7" Name="cmbGender" Height="20" Width="100" 
-                  DisplayMemberPath="Name" Text="Select gender" IsEditable="True"
+                  DisplayMemberPath="Name"
+                  Text="Select gender" IsEditable="True"
                   ItemsSource="{Binding GenderList, UpdateSourceTrigger=PropertyChanged}"                 
                   SelectedItem="{Binding SelectedGender, UpdateSourceTrigger=PropertyChanged}"
                  />
@@ -83,9 +84,9 @@
                   SelectedDate="{Binding User.DateOfBirth, UpdateSourceTrigger=PropertyChanged}"
                  />
         <CheckBox Grid.Column="13" Grid.Row="3" Name="cxbPermisionToExpandTheClinic" Height="20" Width="100"                
-                  IsChecked="{Binding UserDoctor.PermisionToExpandTheClinic, UpdateSourceTrigger=PropertyChanged}"/>
-        <RadioButton Grid.Column="13" Grid.Row="5" IsChecked="{Binding ResponsibleForVehicleAccessibility}" />
-        <RadioButton Grid.Column="13" Grid.Row="7" IsChecked="{Binding ResponsibleForAccessOfHandicaps}" />
+                  IsChecked="{Binding UserMaintainance.PermissionToExpandClinic, UpdateSourceTrigger=PropertyChanged}"/>
+        <RadioButton Grid.Column="13" Grid.Row="5" IsChecked="{Binding UserMaintainance.ResponsibleForVehicleAccessibility}" />
+        <RadioButton Grid.Column="13" Grid.Row="7" IsChecked="{Binding UserMaintainance.ResponsibleForAccessOfHandicaps}" />
         <TextBox Grid.Column="3" Grid.Row="11" Name="txtCitizenship" Height="20" Width="100" 
                  
                  Text="{Binding User.Citizenship, UpdateSourceTrigger=PropertyChanged}"/>

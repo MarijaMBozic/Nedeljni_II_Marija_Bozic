@@ -194,7 +194,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                ManagerView managerView = new ManagerView(user);
+                ManagerView managerView = new ManagerView(userAdmin);
                 managerView.Show();
                 addManagerView.Close();
             }

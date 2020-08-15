@@ -79,6 +79,7 @@
     <Compile Include="ClinicUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Converters\GenderIDToNameConverter.cs" />
     <Compile Include="Department.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -111,9 +112,6 @@
     <Compile Include="Service\Logging.cs" />
     <Compile Include="Service\MasterLogin.cs" />
     <Compile Include="Service\ServiceCode.cs" />
-    <Compile Include="veDoctor.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\AddDoctorViewModel.cs" />
     <Compile Include="ViewModel\AddInstitutionViewModel.cs" />
     <Compile Include="ViewModel\AddMaintainancViewModel.cs" />
@@ -165,7 +163,16 @@
     <Compile Include="Views\PatientView.xaml.cs">
       <DependentUpon>PatientView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="vwDoctor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwMaintenance.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwManager.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwPatient.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Workshift.cs">

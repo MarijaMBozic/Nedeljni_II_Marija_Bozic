@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClinicMedical.Views"
+        xmlns:converters="clr-namespace:ClinicMedical.Converters"
         mc:Ignorable="d"
         Title="ManagerView" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <converters:GenderIDToNameConverter x:Key="GenderIDToNameConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -51,7 +57,7 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Label Grid.Column="9" Grid.Row="1" Name="btnUser" Content="User:" HorizontalAlignment="Right"/>
-        <Label Grid.Column="11" Grid.Row="1" Name="btnUserName" Content="{Binding User.FullName}" />
+        <Label Grid.Column="11" Grid.Row="1" Name="btnUserName" Content="{Binding User.FullName}" HorizontalAlignment="Center"/>
         <Button Grid.Column="13" Grid.Row="1" Name="btnLogOut" Content="LogOut" Width="70" Height="20"
                 Command="{Binding LogOut, UpdateSourceTrigger=PropertyChanged}"
                 FontWeight="Bold" HorizontalAlignment="Left"/>
@@ -65,7 +71,7 @@
                 <DataGridTextColumn Header="FullName " Binding="{Binding FullName}" Width="150"/>
                 <DataGridTextColumn Header="ID number" Binding="{Binding IDNumber}"/>
                 <DataGridTextColumn Header="Date of birth" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" Width="100"/>
-                <DataGridTextColumn Header="Gender" Binding="{Binding GenderName}"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding GenderId, Converter={StaticResource GenderIDToNameConverter}}"/>
                 <DataGridTextColumn Header="Citizenship " Binding="{Binding Citizenship}" Width="80"/>
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="100"/>
                 <DataGridTextColumn Header="Floors" Binding="{Binding ClinicFloor}" Width="60"/>

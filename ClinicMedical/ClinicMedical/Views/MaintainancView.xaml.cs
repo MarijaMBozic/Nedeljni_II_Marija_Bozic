@@ -20,10 +20,24 @@ namespace ClinicMedical.Views
     /// </summary>
     public partial class MaintainancView : Window
     {
-        public MaintainancView()
+        MaintainancViewModel maintainancViewModel;
+
+        public MaintainancView(ClinicUser user)
         {
             InitializeComponent();
-            this.DataContext = new MaintainancViewModel(this);
+            MaintainancViewModel maintainancViewModel= new MaintainancViewModel(user, this);
+            this.DataContext = maintainancViewModel;
+            this.maintainancViewModel = maintainancViewModel;
+        }
+
+        private void btnDeleteMaintenance_Click(object sender, RoutedEventArgs e)
+        {
+            maintainancViewModel.DeleteMaintenanceExecute();
+        }
+
+        private void btnEditMaintenance_Click(object sender, RoutedEventArgs e)
+        {
+            maintainancViewModel.AddEditMaintenance();
         }
     }
 }
