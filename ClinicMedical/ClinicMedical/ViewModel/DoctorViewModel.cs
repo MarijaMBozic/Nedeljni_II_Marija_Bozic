@@ -158,7 +158,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                AddDoctorView addDoctorView = new AddDoctorView(User, new ClinicUser(), new ClinicDoctor());
+                AddDoctorView addDoctorView = new AddDoctorView(User, new ClinicUser(), new ClinicDoctor(), false);
                 addDoctorView.Show();
                 doctorView.Close();
             }
@@ -197,7 +197,7 @@ namespace ClinicMedical.ViewModel
                 clinicDoctor.InChargeOfAdmission = selectedDoctor.InChargeOfAdmission;
                 clinicDoctor.ClinicManagerId = selectedDoctor.ClinicManagerId;
 
-                AddDoctorView addDoctorView = new AddDoctorView(User, clinicUser, clinicDoctor);
+                AddDoctorView addDoctorView = new AddDoctorView(User, clinicUser, clinicDoctor, true);
                 addDoctorView.Show();
                 doctorView.Close();
             }

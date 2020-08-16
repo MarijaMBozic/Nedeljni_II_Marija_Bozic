@@ -17,11 +17,12 @@ namespace ClinicMedical.ViewModel
         ServiceCode service = new ServiceCode();
 
         #region Constructor
-        public AddInstitutionViewModel(ClinicUser user, AddInstitutionView addInstitutionViewOpen)
+        public AddInstitutionViewModel(ClinicUser user, Institution institution, AddInstitutionView addInstitutionViewOpen, bool isForEdit)
         {
             addInstitutionView = addInstitutionViewOpen;
-            Institution = new Institution();
+            this.institution = institution;
             this.user = user;
+            this.isForEdit = isForEdit;
         }
         #endregion
         #region Properties
@@ -51,6 +52,15 @@ namespace ClinicMedical.ViewModel
                 OnPropertyChanged("User");
             }
         }
+
+        private bool isForEdit;
+        public bool IsForEdit
+        {
+            get
+            {
+                return isForEdit;
+            }
+        }
         #endregion
 
         #region Commands
@@ -72,6 +82,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
+                Institution.ClinicUserId = user.ClinicUserId;
                 if (service.AddInstitution(Institution) != 0)
                 {
                     MessageBox.Show("You have successfully added Institution");
@@ -79,7 +90,6 @@ namespace ClinicMedical.ViewModel
                     AdministratorView adminView = new AdministratorView(user);
                     adminView.Show();
                     addInstitutionView.Close();
-
                 }           
             }
             catch (Exception ex)

@@ -115,6 +115,31 @@ namespace ClinicMedical.Service
                 return null;
             }
         }
+
+        public bool? FindeInstitutionByUser(int UserId)
+        {
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    Institution institution = (from p in context.Institutions where p.ClinicUserId==UserId select p).FirstOrDefault();
+                    if (institution != null)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                return null;
+            }
+        }
+
         public int GetDoctorUniqueNumberByDoctorId(int doctorId)
         {
             try
@@ -142,6 +167,7 @@ namespace ClinicMedical.Service
                     if (institution.InstitutionId == 0)
                     {
                         Institution newInstitution = new Institution();
+                        newInstitution.ClinicUserId = institution.ClinicUserId;
                         newInstitution.Name = institution.Name;
                         newInstitution.Owner = institution.Owner;
                         newInstitution.BuildDate = institution.BuildDate;
@@ -160,6 +186,7 @@ namespace ClinicMedical.Service
                     else
                     {
                         Institution editInstitution = (from p in context.Institutions where p.InstitutionId == institution.InstitutionId select p).First();
+                        editInstitution.ClinicUserId = institution.ClinicUserId;
                         editInstitution.Name = institution.Name;
                         editInstitution.Owner = institution.Owner;
                         editInstitution.BuildDate = institution.BuildDate;

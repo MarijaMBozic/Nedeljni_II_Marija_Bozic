@@ -159,7 +159,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {               
-                AddManagerView addManagerView = new AddManagerView(User, new ClinicUser(), new ClinicManager());
+                AddManagerView addManagerView = new AddManagerView(User, new ClinicUser(), new ClinicManager(), false);
                 addManagerView.Show();
                 managerView.Close();
             }
@@ -209,7 +209,7 @@ namespace ClinicMedical.ViewModel
                 clinicManager.MinNumOfRoomSupervised = selectedManager.MinNumOfRoomSupervised;
                 clinicManager.NumberOfMistake = selectedManager.NumberOfMistake;
 
-                AddManagerView addManagerView = new AddManagerView(User, clinicUser, clinicManager);
+                AddManagerView addManagerView = new AddManagerView(User, clinicUser, clinicManager, true);
                 addManagerView.Show();
                 managerView.Close();
             }

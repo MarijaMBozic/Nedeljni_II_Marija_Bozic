@@ -20,9 +20,19 @@ namespace ClinicMedical.Views
     /// </summary>
     public partial class InstitutionView : Window
     {
-        public InstitutionView()
+        InstitutionViewModel institutionViewModel;
+        public InstitutionView(ClinicUser user)
         {
             InitializeComponent();
+            InstitutionViewModel institutionViewModel = new InstitutionViewModel(user, this);
+            this.DataContext = institutionViewModel;
+            this.institutionViewModel = institutionViewModel;
+        }
+
+        private void btnEditInstitution_Click(object sender, RoutedEventArgs e)
+        {
+            institutionViewModel.EditInstitution();
         }
     }
 }
+

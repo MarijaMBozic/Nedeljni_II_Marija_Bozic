@@ -10,6 +10,8 @@
     <Window.Resources>
         <ResourceDictionary>
             <converters:GenderIDToNameConverter x:Key="GenderIDToNameConverter" />
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <converters:BoolToVisibilityInverseConverter x:Key="BoolToVisibilityInverseConverter" />            
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -104,7 +106,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Name="btnAddNewMenager" Content="Add new menager" Width="130" Height="20"
+                
                 Command="{Binding AddNewMenager, UpdateSourceTrigger=PropertyChanged}"
-                FontWeight="Bold" HorizontalAlignment="Left"/>
+                FontWeight="Bold" HorizontalAlignment="Left"/>       
     </Grid>
 </Window>

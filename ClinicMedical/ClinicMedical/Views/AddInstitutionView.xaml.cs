@@ -20,10 +20,10 @@ namespace ClinicMedical.Views
     /// </summary>
     public partial class AddInstitutionView : Window
     {
-        public AddInstitutionView(ClinicUser user)
+        public AddInstitutionView(ClinicUser user, Institution institution, bool isForEdit)
         {
             InitializeComponent();
-            this.DataContext = new AddInstitutionViewModel(user, this);
+            this.DataContext = new AddInstitutionViewModel(user, institution, this, isForEdit);
         }
     }
 }

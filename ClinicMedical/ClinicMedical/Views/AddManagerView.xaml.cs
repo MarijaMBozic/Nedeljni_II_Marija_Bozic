@@ -20,10 +20,10 @@ namespace ClinicMedical.Views
     /// </summary>
     public partial class AddManagerView : Window
     {
-        public AddManagerView(ClinicUser adminUser, ClinicUser user, ClinicManager manager)
+        public AddManagerView(ClinicUser adminUser, ClinicUser user, ClinicManager manager, bool isForEdit)
         {
             InitializeComponent();
-            this.DataContext = new AddManagerViewModel(adminUser, user, manager, this);
+            this.DataContext = new AddManagerViewModel(adminUser, user, manager, this, isForEdit);
         }
     }
 }

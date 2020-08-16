@@ -158,7 +158,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                AddMaintainanceView addMaintainanceView = new AddMaintainanceView(User, new ClinicUser(), new ClinicMaintenance());
+                AddMaintainanceView addMaintainanceView = new AddMaintainanceView(User, new ClinicUser(), new ClinicMaintenance(), false);
                 addMaintainanceView.Show();
                 maintainancView.Close();
             }
@@ -189,7 +189,7 @@ namespace ClinicMedical.ViewModel
                 clinicMaintenance.ResponsibleForAccessOfHandicaps = selectedMaintenance.ResponsibleForAccessOfHandicaps;
                 clinicMaintenance.ResponsibleForVehicleAccessibility = selectedMaintenance.ResponsibleForVehicleAccessibility;
 
-                AddMaintainanceView addMaintainanceView = new AddMaintainanceView(User,clinicUser, clinicMaintenance);
+                AddMaintainanceView addMaintainanceView = new AddMaintainanceView(User,clinicUser, clinicMaintenance, true);
                 addMaintainanceView.Show();
                 maintainancView.Close();
             }

@@ -19,10 +19,11 @@ namespace ClinicMedical.ViewModel
         ServiceCode service = new ServiceCode();
 
         #region Constructor
-        public AddMaintainancViewModel(ClinicUser adminUser, ClinicUser user, ClinicMaintenance clinicMaintenance, AddMaintainanceView addMaintainanceViewOpen)
+        public AddMaintainancViewModel(ClinicUser adminUser, ClinicUser user, ClinicMaintenance clinicMaintenance, AddMaintainanceView addMaintainanceViewOpen, bool isForEdit)
         {
             this.adminUser = adminUser;
             this.userMaintainance=clinicMaintenance;
+            this.isForEdit = isForEdit;
             addMaintainanceView = addMaintainanceViewOpen;
             GenderList = new ObservableCollection<Gender>(service.GetAllGender());
             SelectedGender = GenderList.FirstOrDefault(p => p.GenderId == user.GenderId);
@@ -57,6 +58,15 @@ namespace ClinicMedical.ViewModel
                 selectedGender = value;
                 OnPropertyChanged("SelectedGender");
             }
+        }
+
+        private bool isForEdit;
+        public bool IsForEdit
+        {
+            get
+            {
+                return isForEdit;
+            }           
         }
 
         private ClinicUser adminUser;

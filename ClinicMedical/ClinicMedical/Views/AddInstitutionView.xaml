@@ -4,8 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClinicMedical.Views"
+           xmlns:converters="clr-namespace:ClinicMedical.Converters"
         mc:Ignorable="d"
         Title="AddInstitutionView" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <converters:BoolToVisibilityInverseConverter x:Key="BoolToVisibilityInverseConverter" />
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -49,7 +57,8 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="15" Name="lblInstitution" Content="Add Institution:" Padding="0" HorizontalAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="1" Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}" Grid.ColumnSpan="15" Name="lblInstitution" Content="Add Institution:" Padding="0" HorizontalAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="1" Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}" Grid.ColumnSpan="15" Name="lblEditInstitution" Content="Edit Institution:" Padding="0" HorizontalAlignment="Center"/>
         <Label Grid.Column="1" Grid.Row="3" Name="lblName" Content="Name:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="3" Name="lblValidationName" Padding="0" Grid.ColumnSpan="7" Grid.RowSpan="5" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="5" Name="lblOwner" Content="Owner:" Padding="0" HorizontalAlignment="Right"/>
@@ -65,38 +74,71 @@
         <Label Grid.Column="11" Grid.Row="5" Name="lblTerrace" Content="Terrace:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="5" Name="lblValidationTerrace" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="11" Grid.Row="7" Name="lblBackyard" Content="Backyard:" Padding="0" HorizontalAlignment="Right"/>
-        <Label Grid.Column="11" Grid.Row="9" Name="lblAccessPointsForAmbulances" Content="AccessPointsForAmbulances:" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="9" Grid.Row="9" Grid.ColumnSpan="3" Name="lblAccessPointsForAmbulances" Content="AccessPointsForAmbulances:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="9" Name="lblValidationAccessPointsForAmbulances" Grid.ColumnSpan="5" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Left"/>
-        <Label Grid.Column="11" Grid.Row="11" Name="lblAccessPointsForHandicaps" Content="AccessPointsForhandicaps:" Padding="0" HorizontalAlignment="Right"/>
-        <TextBox Grid.Column="3" Grid.Row="3" Name="txtName" Height="20" Width="100"
-                 
+        <Label Grid.Column="9" Grid.Row="11" Grid.ColumnSpan="3" Name="lblAccessPointsForHandicaps" Content="AccessPointsForhandicaps:" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="3" Grid.Row="3" Name="txtlblName" Height="30" Width="100" 
+              Content="{Binding Institution.Name}"
+              Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+            />
+        <TextBox Grid.Column="3" Grid.Row="3" Name="txtName" Height="20" Width="100" 
+                 Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                  Text="{Binding Institution.Name, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Column="3" Grid.Row="5" Name="txtOwner" Height="20" Width="100"
                  
                  Text="{Binding Institution.Owner, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Column="3" Grid.Row="7" Name="txtAddress" Height="20" Width="100"
-                 
+                 Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                  Text="{Binding Institution.Address, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Column="3" Grid.Row="7" Name="lbltxtAddres" Height="30" Width="100" 
+              Content="{Binding Institution.Address}"
+              Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+            />
         <TextBox Grid.Column="3" Grid.Row="9" Name="txtNumberOfFloors" Height="20" Width="100"
-                 
+                 Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                  Text="{Binding Institution.NumberOfFloors, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Column="3" Grid.Row="9" Name="lbltxtNumberOfFloors" Height="30" Width="100" 
+              Content="{Binding Institution.NumberOfFloors}"
+              Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+            />
         <TextBox Grid.Column="3" Grid.Row="11" Name="txtNumberOfRoomsPerFloor" Height="20" Width="100"
-                 
+                 Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                  Text="{Binding Institution.NumberOfRoomsPerFloor, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Column="3" Grid.Row="11" Name="lbltxtNumberOfRoomsPerFloor" Height="30" Width="100" 
+              Content="{Binding Institution.NumberOfRoomsPerFloor}"
+              Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+            />
         <DatePicker Grid.Column="13" Grid.Row="3" Name="dpBuildDate" Height="25" Width="100"
                   SelectedDate="{Binding Institution.BuildDate, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                  />
-        <CheckBox Grid.Column="13" Grid.Row="5" Name="cxbTerrace" Height="20" Width="100"                
+        <Label Grid.Column="13" Grid.Row="3" Name="lbldpBuildDate" Height="30" Width="100" 
+              Content="{Binding Institution.BuildDate, StringFormat=dd/MM/yyyy}"
+              Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+            />
+        <CheckBox Grid.Column="13" Grid.Row="5" Name="cxbTerrace" Height="20" Width="100" 
+                  Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                   IsChecked="{Binding Institution.Terrace, UpdateSourceTrigger=PropertyChanged}"/>
-        <CheckBox Grid.Column="13" Grid.Row="7" Name="cxbBackyard" Height="20" Width="100"                
+        <Label Grid.Column="13" Grid.Row="5" Name="lblcxbTerrace" Height="30" Width="100" 
+              Content="{Binding Institution.Terrace, Converter={StaticResource BoolToStringConverter}}"
+              Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+            />
+        <CheckBox Grid.Column="13" Grid.Row="7" Name="cxbBackyard" Height="20" Width="100"   
+                  Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
                   IsChecked="{Binding Institution.Backyard, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Column="13" Grid.Row="7" Name="lblcxbBackyard" Height="30" Width="100" 
+              Content="{Binding Institution.Backyard, Converter={StaticResource BoolToStringConverter}}"
+              Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+            />
         <TextBox Grid.Column="13" Grid.Row="9" Name="txtAccessPointsForAmbulances" Height="20" Width="100" 
                  
                  Text="{Binding Institution.AccessPointsForAmbulances, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Column="13" Grid.Row="11" Name="txtAccessPointsForhandicaps" Height="20" Width="100"
                               
                  Text="{Binding Institution.AccessPointsForhandicaps, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Grid.Column="7" Grid.Row="13" Name="btnSave" Content="Save" IsEnabled="True" Height="20" 
+        <Button Grid.Column="7" Grid.Row="13" Name="btnSave" Content="Save" Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}" IsEnabled="True" Height="20" 
+                Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Grid.Column="7" Grid.Row="13" Name="btnEdit" Content="Edit" Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="True" Height="20" 
                 Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>

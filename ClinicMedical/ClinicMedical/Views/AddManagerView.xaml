@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClinicMedical.Views"
+        xmlns:converters="clr-namespace:ClinicMedical.Converters"
         mc:Ignorable="d"
         Title="AddManagerView" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <converters:BoolToVisibilityInverseConverter x:Key="BoolToVisibilityInverseConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -49,7 +56,12 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="15" Name="lblNewManager" Content="Add New Manager:" Padding="0" HorizontalAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="15" 
+               Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
+               Name="lblNewManager" Content="Add New Manager:" Padding="0" HorizontalAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="15" 
+               Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+               Name="lblEditManager" Content="Edit manager:" Padding="0" HorizontalAlignment="Center"/>
         <Label Grid.Column="1" Grid.Row="3" Name="lblFullname" Content="Fullname:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="3" Name="lblValidationFullname" Padding="0" Grid.ColumnSpan="7" Grid.RowSpan="5" HorizontalAlignment="Right"/>
         <Label Grid.Column="9" Grid.Row="3" Grid.ColumnSpan="3" Name="lblMaxNumDoc" Content="Max num. of doctors:" Padding="0" HorizontalAlignment="Right"/>
@@ -68,7 +80,7 @@
         <Label Grid.Column="5" Grid.Row="11" Name="lblValidationCitizenship" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="13" Name="lblAdminUsername" Content="Username:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="5" Grid.Row="13" Name="lblValidationAdminUsername" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Left"/>
-        <Label Grid.Column="1" Grid.Row="15" Name="lblAdminPassword" Content="Password:" Padding="0" HorizontalAlignment="Right"/>
+        <Label Grid.Column="1" Grid.Row="15" Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}" Name="lblAdminPassword" Content="Password:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="7" Grid.Row="15" Name="lblValidationAdminPassword" Grid.ColumnSpan="7" Grid.RowSpan="5" Padding="0" HorizontalAlignment="Left"/>
         <TextBox Grid.Column="3" Grid.Row="3" Name="txtFullname" Height="20" Width="100"
                  
@@ -103,9 +115,15 @@
                               
                  Text="{Binding User.Username, UpdateSourceTrigger=PropertyChanged}"/>       
         <PasswordBox Grid.Column="3" Grid.Row="15" Name="txtPassword" Height="20" Width="100"
-                    />
+                   Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
+                     />
         <Button Grid.Column="5" Grid.Row="17" Name="btnSave" Content="Add" IsEnabled="True" Height="20" 
                 Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
+                Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityInverseConverter}}"
+                CommandParameter="{Binding ElementName=txtPassword}"/>
+        <Button Grid.Column="5" Grid.Row="17" Name="btnEdit" Content="Edit" IsEnabled="True" Height="20" 
+                Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
+                Visibility="{Binding IsForEdit, Converter={StaticResource BoolToVisibilityConverter}}"
                 CommandParameter="{Binding ElementName=txtPassword}"/>
         <Button Grid.Column="9" Grid.Row="17" Name="btnQuit" Content="Quit" IsEnabled="True" Height="20" 
                 Width="70" HorizontalAlignment="Left" Command="{Binding Quit, UpdateSourceTrigger=PropertyChanged}"/>

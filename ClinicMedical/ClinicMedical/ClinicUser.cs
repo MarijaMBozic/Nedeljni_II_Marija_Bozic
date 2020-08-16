@@ -21,6 +21,7 @@ namespace ClinicMedical
             this.ClinicMaintenances = new HashSet<ClinicMaintenance>();
             this.ClinicManagers = new HashSet<ClinicManager>();
             this.ClinicPatients = new HashSet<ClinicPatient>();
+            this.Institutions = new HashSet<Institution>();
         }
     
         public int ClinicUserId { get; set; }
@@ -44,5 +45,7 @@ namespace ClinicMedical
         public virtual ICollection<ClinicPatient> ClinicPatients { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Institution> Institutions { get; set; }
     }
 }

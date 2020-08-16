@@ -4,30 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="93b2977e76bb4c67970a8eb810ec7657" Name="Diagram1">
-        <EntityTypeShape EntityType="MedicaClinicModel.ClinicDoctor" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.ClinicMaintenance" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.ClinicManager" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.ClinicPatient" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.ClinicUser" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.Department" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.Gender" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.Institution" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.Role" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.Workshift" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.vwDoctor" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.vwMaintenance" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.vwManager" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicaClinicModel.vwPatient" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Clini__01F34141" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Clini__04CFADEC" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Depar__02E7657A" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__WorkS__03DB89B3" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicMai__Clini__795DFB40" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicMan__Clini__7C3A67EB" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicPat__Clini__07AC1A97" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicUse__Gende__73A521EA" ManuallyRouted="false" />
-        <AssociationConnector Association="MedicaClinicModel.FK__ClinicUse__RoleI__758D6A5C" ManuallyRouted="false" />
+      <Diagram DiagramId="184d415293c94324b73db2c851eea675" Name="Diagram1">
+        <EntityTypeShape EntityType="MedicaClinicModel.ClinicDoctor" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.ClinicMaintenance" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.ClinicManager" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.ClinicPatient" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.ClinicUser" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.Department" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.Gender" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.Institution" Width="1.5" PointX="5.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.Role" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.Workshift" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.vwDoctor" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.vwMaintenance" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.vwManager" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicaClinicModel.vwPatient" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Clini__2CDD9F46" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Clini__2FBA0BF1" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__Depar__2DD1C37F" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicDoc__WorkS__2EC5E7B8" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicMai__Clini__24485945" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicMan__Clini__2724C5F0" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicPat__Clini__3296789C" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicUse__Gende__19CACAD2" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__ClinicUse__RoleI__1BB31344" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicaClinicModel.FK__Instituti__Clini__216BEC9A" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

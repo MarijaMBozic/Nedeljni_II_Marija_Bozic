@@ -4,8 +4,8 @@ drop table if exists ClinicPatient
 drop table if exists ClinicDoctor
 drop table if exists ClinicManager
 drop table if exists ClinicMaintenance
-drop table if exists ClinicUser
 drop table if exists Institution 
+drop table if exists ClinicUser
 drop table if exists Gender
 drop table if exists Role
 drop table if exists Workshift
@@ -31,19 +31,6 @@ create table Department(
    Name             nvarchar(100)   unique not null
    )
 
-create table Institution(
-   InstitutionId               int            identity (1,1) primary key,
-   BuildDate				   date			   default getDate(),
-   Name                        nvarchar(100)   unique not null,
-   Owner                       nvarchar(100)          not null,
-   Address                     nvarchar(100)          not null,
-   NumberOfFloors              int                    not null,
-   NumberOfRoomsPerFloor       int                    not null,
-   Terrace                     bit                    not null,
-   Backyard                    bit		              not null,
-   AccessPointsForAmbulances   int                    not null,
-   AccessPointsForhandicaps    int                    not null   		 
-)
 
 create table ClinicUser(
    ClinicUserId                int            identity (1,1) primary key,   
@@ -58,6 +45,22 @@ create table ClinicUser(
    RoleId                      int                    not null,
    FOREIGN KEY (RoleId)  REFERENCES Role(RoleId), 
    IsDeleted                    bit                   default 0 not null
+)
+
+create table Institution(
+   InstitutionId               int            identity (1,1) primary key,
+   BuildDate				   date			   default getDate(),
+   Name                        nvarchar(100)   unique not null,
+   Owner                       nvarchar(100)          not null,
+   Address                     nvarchar(100)          not null,
+   NumberOfFloors              int                    not null,
+   NumberOfRoomsPerFloor       int                    not null,
+   Terrace                     bit                    not null,
+   Backyard                    bit		              not null,
+   AccessPointsForAmbulances   int                    not null,
+   AccessPointsForhandicaps    int                    not null, 
+   ClinicUserId                      int              not null,
+   FOREIGN KEY (ClinicUserId)  REFERENCES ClinicUser(ClinicUserId), 	 
 )
 
 create table ClinicMaintenance(

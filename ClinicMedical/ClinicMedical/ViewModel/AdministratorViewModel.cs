@@ -94,7 +94,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                InstitutionView main = new InstitutionView();
+                InstitutionView main = new InstitutionView(user);
                 main.Show();
                 administratorView.Close();
             }

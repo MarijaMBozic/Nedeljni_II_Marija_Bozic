@@ -25,5 +25,8 @@ namespace ClinicMedical
         public bool Backyard { get; set; }
         public int AccessPointsForAmbulances { get; set; }
         public int AccessPointsForhandicaps { get; set; }
+        public int ClinicUserId { get; set; }
+    
+        public virtual ClinicUser ClinicUser { get; set; }
     }
 }

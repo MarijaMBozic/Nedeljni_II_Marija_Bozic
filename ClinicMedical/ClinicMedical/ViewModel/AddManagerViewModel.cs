@@ -19,16 +19,18 @@ namespace ClinicMedical.ViewModel
         ServiceCode service = new ServiceCode();
 
         #region Constructor
-        public AddManagerViewModel(ClinicUser userAdmin, ClinicUser user, ClinicManager clinicManager, AddManagerView addManagerViewOpen)
+        public AddManagerViewModel(ClinicUser userAdmin, ClinicUser user, ClinicManager clinicManager, AddManagerView addManagerViewOpen, bool isForEdit)
         {
             this.userAdmin = userAdmin;
             this.userManager = clinicManager;
             this.user = user;
+            this.isForEdit = isForEdit;
             addManagerView = addManagerViewOpen;
             GenderList = new ObservableCollection<Gender>(service.GetAllGender());       
             SelectedGender = GenderList.FirstOrDefault(p => p.GenderId == user.GenderId);
             FloorList = new ObservableCollection<int>(service.ListOfFreeFloors());
-            SelectedFloor = FloorList.FirstOrDefault(p => p.Equals(userManager.ClinicFloor));
+            FloorList.Add(userManager.ClinicFloor);
+            SelectedFloor = userManager.ClinicFloor;
         }
         #endregion
         #region Properties
@@ -71,6 +73,15 @@ namespace ClinicMedical.ViewModel
                 selectedFloor = value;
                 OnPropertyChanged("SelectedFloor");
             }
+        }
+
+        private bool isForEdit;
+        public bool IsForEdit
+        {
+            get
+            {
+                return isForEdit;
+            }           
         }
 
         private Gender selectedGender;

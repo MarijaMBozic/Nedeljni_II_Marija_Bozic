@@ -16,19 +16,15 @@ namespace ClinicMedical.ViewModel
     public class AddDoctorViewModel:ViewModelBase
     {
         AddDoctorView addDoctorView;
-        ServiceCode service = new ServiceCode();
-         
-        //    GenderList = new ObservableCollection<Gender>(service.GetAllGender());
-        //    SelectedGender = GenderList.FirstOrDefault(p => p.GenderId == user.GenderId);
-        //    FloorList = new ObservableCollection<int>(service.ListOfFreeFloors());
-        //    SelectedFloor = FloorList.FirstOrDefault(p => p.Equals(userManager.ClinicFloor));
-   
+        ServiceCode service = new ServiceCode();       
+
         #region Constructor
-        public AddDoctorViewModel(ClinicUser userAdmin, ClinicUser user, ClinicDoctor clinicDoctor,  AddDoctorView addDoctorViewOpen)
+        public AddDoctorViewModel(ClinicUser userAdmin, ClinicUser user, ClinicDoctor clinicDoctor,  AddDoctorView addDoctorViewOpen, bool isForEdit)
         {
             this.userAdmin = userAdmin;
             this.userDoctor = clinicDoctor;
             this.user = user;
+            this.isForEdit = isForEdit;
             addDoctorView = addDoctorViewOpen;
             GenderList = new ObservableCollection<Gender>(service.GetAllGender());
             SelectedGender = GenderList.FirstOrDefault(p => p.GenderId == user.GenderId);
@@ -37,8 +33,8 @@ namespace ClinicMedical.ViewModel
             WorkShiftList = new ObservableCollection<Workshift>(service.GetAllWorkshift());
             SelectedWorkShift = WorkShiftList.FirstOrDefault(p => p.WorkShiftId == userDoctor.WorkShiftId);
             ManagerList = new ObservableCollection<vwManager>(service.GetAllManager());
-           
-        }
+            SelectedManager = ManagerList.FirstOrDefault(p => p.ClinicManagerId == userDoctor.ClinicManagerId);
+          }
         #endregion
         #region Properties
         private ObservableCollection<Gender> genderList;
@@ -165,6 +161,15 @@ namespace ClinicMedical.ViewModel
                 user = value;
                 OnPropertyChanged("User");
             }
+        }
+
+        private bool isForEdit;
+        public bool IsForEdit
+        {
+            get
+            {
+                return isForEdit;
+            }            
         }
 
         private ClinicDoctor userDoctor;

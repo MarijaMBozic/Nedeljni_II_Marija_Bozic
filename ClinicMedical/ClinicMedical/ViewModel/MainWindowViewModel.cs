@@ -21,8 +21,8 @@ namespace ClinicMedical.ViewModel
         #region Constructor
         public MainWindowViewModel(MainWindow mainOpen)
         {
-            this.main = mainOpen;
-            Institution = service.GetAllInstitution();
+            this.main = mainOpen;  
+            
         }
         #endregion
 
@@ -41,8 +41,8 @@ namespace ClinicMedical.ViewModel
             }
         }
 
-        private List<Institution> institution;
-        public List<Institution> Institution
+        private Institution institution;
+        public Institution Institution
         {
             get
             {
@@ -93,10 +93,10 @@ namespace ClinicMedical.ViewModel
                     {
                         if(user.RoleId==1)
                         {
-                            if (Institution.Count == 0)
+                            if (service.FindeInstitutionByUser(user.ClinicUserId)==false)
                             {
                                 MessageBox.Show("Successful login");
-                                AddInstitutionView window = new AddInstitutionView(user);
+                                AddInstitutionView window = new AddInstitutionView(user, new Institution(), false);
                                 window.Show();
                                 main.Close();
                             }
