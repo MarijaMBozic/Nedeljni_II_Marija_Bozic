@@ -208,7 +208,10 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                service.DeleteUser(selectedMaintenance.ClinicUserId);
+                if(service.DeleteUser(selectedMaintenance.ClinicUserId)==true)
+                {
+                    Logging.LoggAction("MaintainancViewModel", "Info", "Succesfull deleted maintainanc");
+                }
                 ListOFMaintenance = new ObservableCollection<vwMaintenance>(service.GetAllvwMaintainancList());
             }
             catch (Exception ex)

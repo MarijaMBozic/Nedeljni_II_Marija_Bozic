@@ -211,7 +211,10 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                service.DeleteUser(selectedDoctor.ClinicUserId);
+                if(service.DeleteUser(selectedDoctor.ClinicUserId)==true)
+                {
+                    Logging.LoggAction("DoctorViewModel", "Info", "Succesfull deleted doctor");
+                }
                 ListOfDoctors = new ObservableCollection<vwDoctor>(service.GetAllvwDoctorsList());
             }
             catch (Exception ex)

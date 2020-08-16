@@ -198,6 +198,7 @@ namespace ClinicMedical.Service
                         editInstitution.AccessPointsForAmbulances = institution.AccessPointsForAmbulances;
                         editInstitution.AccessPointsForhandicaps = institution.AccessPointsForhandicaps;
                         context.SaveChanges();
+                        Logging.LoggAction("AddInstitutionViewModel", "Info", "Succesfull edited institution");
                         return institution.InstitutionId;
                     }
                 }
@@ -248,7 +249,7 @@ namespace ClinicMedical.Service
                         editUser.IsDeleted = false;
                         editUser.RoleId = user.RoleId;
                         editUser.ClinicUserId = user.ClinicUserId;
-                        context.SaveChanges();
+                        context.SaveChanges();                        
                         return user.ClinicUserId;
                     }
                 }                
@@ -295,6 +296,7 @@ namespace ClinicMedical.Service
                         editClinicUser.ClinicManagerId = user.ClinicManagerId;
                         editClinicUser.ClinicDoctorId = user.ClinicDoctorId;
                         context.SaveChanges();
+                        Logging.LoggAction("AddDoctorViewModel", "Info", "Succesfull edited doctor");
                         return user.ClinicDoctorId;
                     }
                 }
@@ -335,6 +337,7 @@ namespace ClinicMedical.Service
                         editClinicUser.ResponsibleForVehicleAccessibility = user.ResponsibleForVehicleAccessibility;
                         editClinicUser.ClinicMaintenanceId = user.ClinicMaintenanceId;
                         context.SaveChanges();
+                        Logging.LoggAction("AddMaintainancViewModel", "Info", "Succesfull edited maintenance");
                         return user.ClinicMaintenanceId;
                     }
                 }
@@ -377,6 +380,7 @@ namespace ClinicMedical.Service
                         editClinicUser.NumberOfMistake = user.NumberOfMistake;
                         editClinicUser.ClinicManagerId = user.ClinicManagerId;
                         context.SaveChanges();
+                        Logging.LoggAction("AddManagerViewModel", "Info", "Succesfull edited manager");
                         return user.ClinicManagerId;
                     }
                 }
@@ -417,6 +421,7 @@ namespace ClinicMedical.Service
                         editClinicUser.UniqueDoctorNumber = user.UniqueDoctorNumber;
                         editClinicUser.ClinicPatientId = user.ClinicPatientId;
                         context.SaveChanges();
+                        Logging.LoggAction("AddPatientViewModel", "Info", "Succesfull edited patient");
                         return user.ClinicPatientId;
                     }
                 }
@@ -643,7 +648,7 @@ namespace ClinicMedical.Service
                 return null;
             }
         }
-        public void DeleteUser(int userId)
+        public bool DeleteUser(int userId)
         {
             try
             {
@@ -652,12 +657,14 @@ namespace ClinicMedical.Service
                     ClinicUser resultToDelete = (from r in context.ClinicUsers where r.ClinicUserId == userId select r).First();
                     resultToDelete.IsDeleted= true;
                     context.SaveChanges();
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
                 Logging.LoggAction("DeleteUser", "Error", ex.ToString());
+                return false;
             }
         }
 

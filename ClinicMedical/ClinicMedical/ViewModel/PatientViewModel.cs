@@ -179,7 +179,10 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                service.DeleteUser(selectedPatient.ClinicUserId);
+                if(service.DeleteUser(selectedPatient.ClinicUserId)==true)
+                {
+                    Logging.LoggAction("PatientViewModel", "Info", "Succesfull deleted patient");
+                }
                 ListOfPatients = new ObservableCollection<vwPatient>(service.GetAllvwPatientsList());
             }
             catch (Exception ex)
