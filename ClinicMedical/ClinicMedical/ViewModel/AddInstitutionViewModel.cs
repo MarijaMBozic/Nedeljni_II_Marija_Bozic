@@ -80,23 +80,68 @@ namespace ClinicMedical.ViewModel
 
         public void SaveExecute(object parametar)
         {
+            int currentAccessPointAmbulance = service.GetAccesPointAmbulance();
+            int currentAccesspointHandicaps = service.GetAccesPointHandicaps();
+
+            if(currentAccessPointAmbulance> Institution.AccessPointsForAmbulances ||
+                currentAccesspointHandicaps>Institution.AccessPointsForhandicaps)
+            {
+                MessageBox.Show("The number of access points cannot be less than the current one");
+            }
+            else
+            {
+                try
+                {
+                    Institution.ClinicUserId = user.ClinicUserId;
+
+                    if (service.AddInstitution(Institution) != 0)
+                    {
+                        MessageBox.Show("You have successfully added Institution");
+                        Logging.LoggAction("AddInstitutionViewModel", "Info", "Succesfull added new Institution");
+                        AdministratorView adminView = new AdministratorView(user);
+                        adminView.Show();
+                        addInstitutionView.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    Logging.LoggAction("AddInstitutionViewModel", "Error", ex.ToString());
+                }
+            }
+            
+        }
+        private ICommand quit;
+
+        public ICommand Quit
+        {
+            get
+            {
+                if (quit == null)
+                {
+                    quit = new RelayCommand(param => QuitExecute(), param => CanQuitExecute());
+                }
+                return quit;
+            }
+        }
+
+        public void QuitExecute()
+        {
             try
             {
-                Institution.ClinicUserId = user.ClinicUserId;
-                if (service.AddInstitution(Institution) != 0)
-                {
-                    MessageBox.Show("You have successfully added Institution");
-                    Logging.LoggAction("AddInstitutionViewModel", "Info", "Succesfull added new Institution");
-                    AdministratorView adminView = new AdministratorView(user);
-                    adminView.Show();
-                    addInstitutionView.Close();
-                }           
+                MainWindow main = new MainWindow();
+                main.Show();
+                addInstitutionView.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Logging.LoggAction("AddInstitutionViewModel", "Error", ex.ToString());
             }
+        }
+
+        private bool CanQuitExecute()
+        {
+            return true;
         }
         #endregion
     }

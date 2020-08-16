@@ -87,7 +87,7 @@ create table ClinicDoctor(
  ClinicUserId                           int                    not null,
  FOREIGN KEY (ClinicUserId)  REFERENCES ClinicUser(ClinicUserId),
  UniqueNumber                           int           unique   not null,
- BancAccount                            int           unique   not null,
+ BancAccount                            bigint           unique   not null,
  DepartmentId                           int                    not null,
  FOREIGN KEY (DepartmentId)  REFERENCES Department(DepartmentId),
  WorkShiftId                            int                    not null,

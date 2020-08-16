@@ -10,6 +10,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <converters:GenderIDToNameConverter x:Key="GenderIDToNameConverter" />
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -78,7 +79,7 @@
                 <DataGridTextColumn Header="Banc Account" Binding="{Binding BancAccount}" Width="60"/>
                 <DataGridTextColumn Header="Department" Binding="{Binding DepartmanName}" Width="50"/>
                 <DataGridTextColumn Header="Work Shift" Binding="{Binding WorkShiftName}" Width="60"/>
-                <DataGridTextColumn Header="In Charge Of Admission" Binding="{Binding InChargeOfAdmission}" Width="50"/>
+                <DataGridTextColumn Header="In Charge Of Admission" Binding="{Binding InChargeOfAdmission, Converter={StaticResource BoolToStringConverter}}" Width="50"/>
                 <DataGridTextColumn Header="Manager" Binding="{Binding ClinicManagerId}" Width="50"/>
                 <DataGridTemplateColumn Header="Edit" Width="60" >
                     <DataGridTemplateColumn.CellTemplate>

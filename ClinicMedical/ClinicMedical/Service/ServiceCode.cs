@@ -81,14 +81,14 @@ namespace ClinicMedical.Service
                 return null;
             }
         }
-        public List<ClinicUser> GetAllDoctors()
+        public List<vwDoctor> GetAllDoctors()
         {
             try
             {
                 using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
-                    List<ClinicUser> list = new List<ClinicUser>();
-                    list = (from p in context.ClinicUsers where p.RoleId == 4 where p.IsDeleted==false select p).ToList();
+                    List<vwDoctor> list = new List<vwDoctor>();
+                    list = (from p in context.vwDoctors where p.IsDeleted==false select p).ToList();
                     return list;
                 }
             }
@@ -503,7 +503,7 @@ namespace ClinicMedical.Service
                 return false;
             }
         }
-        public bool CheckBancAccount(int bancAccount)
+        public bool CheckBancAccount(long bancAccount)
         {
             try
             {
@@ -580,7 +580,7 @@ namespace ClinicMedical.Service
                 using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
                 {
                     List<vwManager> list = new List<vwManager>();
-                    list = (from p in context.vwManagers where p.IsDeleted==false select p).ToList();
+                    list = (from p in context.vwManagers where p.IsDeleted == false select p).ToList();
                     return list;
                 }      
             }
@@ -626,7 +626,23 @@ namespace ClinicMedical.Service
                 return null;
             }
         }
-
+        public List<vwPatient> GetAllvwPatientsList()
+        {
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    List<vwPatient> listPatient = new List<vwPatient>();
+                    listPatient = (from p in context.vwPatients where p.IsDeleted == false select p).ToList();
+                    return listPatient;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exeption" + ex.Message.ToString());
+                return null;
+            }
+        }
         public void DeleteUser(int userId)
         {
             try
@@ -641,6 +657,7 @@ namespace ClinicMedical.Service
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                Logging.LoggAction("DeleteUser", "Error", ex.ToString());
             }
         }
 
@@ -724,6 +741,42 @@ namespace ClinicMedical.Service
             {
                 System.Diagnostics.Debug.WriteLine("Exep tion" + ex.Message.ToString());
             }
+        }
+
+        public int GetAccesPointAmbulance()
+        {
+            int result=0;
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    result = (from p in context.Institutions select p.AccessPointsForAmbulances).First();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exep tion" + ex.Message.ToString());
+            }
+            return result;
+        }
+
+        public int GetAccesPointHandicaps()
+        {
+            int result = 0;
+            try
+            {
+                using (MedicaClinicEntities2 context = new MedicaClinicEntities2())
+                {
+                    result = (from p in context.Institutions select p.AccessPointsForhandicaps).First();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exep tion" + ex.Message.ToString());
+            }
+            return result;
         }
     }
 }

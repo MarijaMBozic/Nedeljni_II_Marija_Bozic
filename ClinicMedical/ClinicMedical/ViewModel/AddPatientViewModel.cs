@@ -19,13 +19,17 @@ namespace ClinicMedical.ViewModel
         ServiceCode service = new ServiceCode();
 
         #region Constructor
-        public AddPatientViewModel(AddPatientView addPatientViewOpen)
+        public AddPatientViewModel(ClinicUser userAdmin, ClinicUser user, ClinicPatient patient, AddPatientView addPatientViewOpen, bool isForEdit)
         {
+            this.userAdmin = userAdmin;
+            this.user = user;
+            this.userPatient = patient;            
+            this.isForEdit = isForEdit;
             addPatientView = addPatientViewOpen;
-            GenderList = new ObservableCollection<Gender>(service.GetAllGender());          
-            DoctorList = new ObservableCollection<ClinicUser>(service.GetAllDoctors());
-            User = new ClinicUser();
-            UserPatient = new ClinicPatient();
+            GenderList = new ObservableCollection<Gender>(service.GetAllGender());
+            SelectedGender = GenderList.FirstOrDefault(p => p.GenderId == user.GenderId);
+            DoctorList = new ObservableCollection<vwDoctor>(service.GetAllDoctors());
+            SelectedDoctor = DoctorList.FirstOrDefault(p=>p.UniqueNumber==patient.UniqueDoctorNumber);
         }
         #endregion
 
@@ -58,8 +62,32 @@ namespace ClinicMedical.ViewModel
             }
         }
 
-        private ObservableCollection<ClinicUser> doctorList;
-        public ObservableCollection<ClinicUser> DoctorList
+
+        private bool isForEdit;
+        public bool IsForEdit
+        {
+            get
+            {
+                return isForEdit;
+            }
+        }
+
+        private ClinicUser userAdmin;
+        public ClinicUser UserAdmin
+        {
+            get
+            {
+                return userAdmin;
+            }
+            set
+            {
+                userAdmin = value;
+                OnPropertyChanged("UserAdmin");
+            }
+        }
+
+        private ObservableCollection<vwDoctor> doctorList;
+        public ObservableCollection<vwDoctor> DoctorList
         {
             get
             {
@@ -72,8 +100,8 @@ namespace ClinicMedical.ViewModel
             }
         }
 
-        private ClinicUser selectDoctor;
-        public ClinicUser SelectedDoctor
+        private vwDoctor selectDoctor;
+        public vwDoctor SelectedDoctor
         {
             get
             {
@@ -148,10 +176,16 @@ namespace ClinicMedical.ViewModel
                         UserPatient.ClinicUserId = userId;
                         UserPatient.UniqueDoctorNumber = drUniqueNumber;
 
-                        service.AddNewPatient(UserPatient);
-                        MessageBox.Show("You have successfully added new patient");
-                        Logging.LoggAction("AddPatientViewModel", "Info", "Succesfull added new doctor");
-                    }
+                        if (service.AddNewPatient(UserPatient) != 0)
+                        {
+                            MessageBox.Show("You have successfully added new patient");
+                            Logging.LoggAction("AddPatientViewModel", "Info", "Succesfull added new doctor");
+
+                            PatientView patientView = new PatientView(UserAdmin);
+                            patientView.Show();
+                            addPatientView.Close();
+                        }
+                    }                        
                 }
             }
             catch (Exception ex)
@@ -159,6 +193,38 @@ namespace ClinicMedical.ViewModel
                 MessageBox.Show(ex.ToString());
                 Logging.LoggAction("AddDoctorViewModel", "Error", ex.ToString());
             }
+        }
+        private ICommand quit;
+
+        public ICommand Quit
+        {
+            get
+            {
+                if (quit == null)
+                {
+                    quit = new RelayCommand(param => QuitExecute(), param => CanQuitExecute());
+                }
+                return quit;
+            }
+        }
+
+        public void QuitExecute()
+        {
+            try
+            {
+                PatientView patientView = new PatientView(UserAdmin);
+                patientView.Show();
+                addPatientView.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanQuitExecute()
+        {
+            return true;
         }
         #endregion
     }

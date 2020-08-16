@@ -27,8 +27,6 @@ namespace ClinicMedical
         public int InsuranceNumber { get; set; }
         public Nullable<System.DateTime> InsuranceExpirationDate { get; set; }
         public int UniqueDoctorNumber { get; set; }
-        public string GenderName { get; set; }
-        public int DrUniquNumber { get; set; }
         public int ClinicPatientId { get; set; }
     }
 }

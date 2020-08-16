@@ -226,7 +226,7 @@ namespace ClinicMedical.ViewModel
         {
             try
             {
-                PatientView main = new PatientView();
+                PatientView main = new PatientView(user);
                 main.Show();
                 administratorView.Close();
             }

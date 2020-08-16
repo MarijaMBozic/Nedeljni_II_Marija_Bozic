@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicMedical.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,10 +19,25 @@ namespace ClinicMedical.Views
     /// Interaction logic for PatientView.xaml
     /// </summary>
     public partial class PatientView : Window
-    {
-        public PatientView()
+    { 
+        PatientViewModel patientViewModel;
+        public PatientView(ClinicUser user)
         {
             InitializeComponent();
+            PatientViewModel patientViewModel = new PatientViewModel(user, this);
+            this.DataContext = patientViewModel;
+            this.patientViewModel = patientViewModel;
+        }
+
+        private void btnDeletePatient_Click(object sender, RoutedEventArgs e)
+        {
+            patientViewModel.DeleteManagerExecute();
+        }
+
+        private void btnEditPatient_Click(object sender, RoutedEventArgs e)
+        {
+            patientViewModel.EditPatient();
         }
     }
 }
+

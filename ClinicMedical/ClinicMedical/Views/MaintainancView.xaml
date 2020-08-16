@@ -9,7 +9,8 @@
         Title="MaintainancView" Height="450" Width="800">
     <Window.Resources>
         <ResourceDictionary>
-            <converters:GenderIDToNameConverter x:Key="GenderIDToNameConverter" />           
+            <converters:GenderIDToNameConverter x:Key="GenderIDToNameConverter" />
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -74,9 +75,9 @@
                 <DataGridTextColumn Header="Gender" Binding="{Binding GenderId,  Converter={StaticResource GenderIDToNameConverter}}"/>
                 <DataGridTextColumn Header="Citizenship " Binding="{Binding Citizenship}" Width="80"/>
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="100"/>
-                <DataGridTextColumn Header="Permission for expanding" Binding="{Binding  PermissionToExpandClinic}" Width="130"/>
-                <DataGridTextColumn Header="Responsible for Ambulance Accessibility" Binding="{Binding ResponsibleForVehicleAccessibility}" Width="60"/>
-                <DataGridTextColumn Header="Responsible for Access Of Handicaps" Binding="{Binding ResponsibleForAccessOfHandicaps}" Width="50"/>
+                <DataGridTextColumn Header="Permission for expanding" Binding="{Binding  PermissionToExpandClinic, Converter={StaticResource BoolToStringConverter}}" Width="130"/>
+                <DataGridTextColumn Header="Responsible for Ambulance Accessibility" Binding="{Binding ResponsibleForVehicleAccessibility, Converter={StaticResource BoolToStringConverter}}" Width="60"/>
+                <DataGridTextColumn Header="Responsible for Access Of Handicaps" Binding="{Binding ResponsibleForAccessOfHandicaps, Converter={StaticResource BoolToStringConverter}}" Width="50"/>
                 <DataGridTemplateColumn Header="Edit" Width="60" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

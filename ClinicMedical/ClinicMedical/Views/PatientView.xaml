@@ -4,9 +4,108 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClinicMedical.Views"
+        xmlns:converters="clr-namespace:ClinicMedical.Converters"
         mc:Ignorable="d"
         Title="PatientView" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <converters:GenderIDToNameConverter x:Key="GenderIDToNameConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="9" Grid.Row="1" Name="btnUser" Content="User:" HorizontalAlignment="Right"/>
+        <Label Grid.Column="11" Grid.Row="1" Name="btnUserName" Content="{Binding User.FullName}" HorizontalAlignment="Center"/>
+        <Button Grid.Column="13" Grid.Row="1" Name="btnLogOut" Content="LogOut" Width="70" Height="20"
+                Command="{Binding LogOut, UpdateSourceTrigger=PropertyChanged}"
+                FontWeight="Bold" HorizontalAlignment="Left"/>
+        <Button Grid.Column="1" Grid.Row="18" Grid.ColumnSpan="3" Margin="0,0,5,0" Name="btnBack" Content="Back to main page" Width="130" Height="20"
+                Command="{Binding BackToAdminView, UpdateSourceTrigger=PropertyChanged}"
+                FontWeight="Bold" HorizontalAlignment="Left"/>
+        <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="10" Name="DataGridResults" ItemsSource="{Binding ListOfPatients, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedPatient, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
+                      AutoGenerateColumns="False" HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black" FontWeight="Bold" Grid.ColumnSpan="13">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="FullName " Binding="{Binding FullName}" Width="150"/>
+                <DataGridTextColumn Header="ID number" Binding="{Binding IDNumber}"/>
+                <DataGridTextColumn Header="Date of birth" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" Width="100"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding GenderId, Converter={StaticResource GenderIDToNameConverter}}"/>
+                <DataGridTextColumn Header="Citizenship " Binding="{Binding Citizenship}" Width="80"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="100"/>
+                <DataGridTextColumn Header="Insurance Number" Binding="{Binding InsuranceNumber}" Width="120"/>
+                <DataGridTextColumn Header="Insurance Expiration Date" Binding="{Binding InsuranceExpirationDate, StringFormat=dd/MM/yyyy}" Width="100"/>
+                <DataGridTextColumn Header="Unique Doctor Number" Binding="{Binding UniqueDoctorNumber}" Width="70"/>
+                <DataGridTemplateColumn Header="Edit" Width="60" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="150" Orientation="Horizontal">
+                                <Button Name="btnEditPatient" Content="Edit" Width="60" Height="20"
+                                         FontWeight="Bold" Margin="0" HorizontalAlignment="Right"
+                                        Click="btnEditPatient_Click"
+                                        />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Delete" Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Button Name="btnDeletePatient" Content="Delete" Width="60" Height="20"
+                                         FontWeight="Bold" HorizontalAlignment="Right"
+                                        Click="btnDeletePatient_Click"
+                                        />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Name="btnAddNewPatient" Content="Add new patient" Width="130" Height="20"
+                
+                Command="{Binding AddNewMenager, UpdateSourceTrigger=PropertyChanged}"
+                FontWeight="Bold" HorizontalAlignment="Left"/>
     </Grid>
 </Window>

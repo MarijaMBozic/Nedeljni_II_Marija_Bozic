@@ -17,7 +17,7 @@ namespace ClinicMedical
         public int ClinicDoctorId { get; set; }
         public int ClinicUserId { get; set; }
         public int UniqueNumber { get; set; }
-        public int BancAccount { get; set; }
+        public long BancAccount { get; set; }
         public int DepartmentId { get; set; }
         public int WorkShiftId { get; set; }
         public bool InChargeOfAdmission { get; set; }

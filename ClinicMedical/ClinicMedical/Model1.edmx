@@ -12,7 +12,7 @@
           <Property Name="ClinicDoctorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClinicUserId" Type="int" Nullable="false" />
           <Property Name="UniqueNumber" Type="int" Nullable="false" />
-          <Property Name="BancAccount" Type="int" Nullable="false" />
+          <Property Name="BancAccount" Type="bigint" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="WorkShiftId" Type="int" Nullable="false" />
           <Property Name="InChargeOfAdmission" Type="bit" Nullable="false" />
@@ -122,15 +122,15 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwDoctor' does not have a primary
             <PropertyRef Name="Password" />
             <PropertyRef Name="RoleId" />
             <PropertyRef Name="IsDeleted" />
+            <PropertyRef Name="DepartmanName" />
+            <PropertyRef Name="WorkShiftName" />
             <PropertyRef Name="ClinicManagerId" />
-            <PropertyRef Name="InChargeOfAdmission" />
             <PropertyRef Name="WorkShiftId" />
+            <PropertyRef Name="InChargeOfAdmission" />
             <PropertyRef Name="DepartmentId" />
             <PropertyRef Name="BancAccount" />
             <PropertyRef Name="UniqueNumber" />
             <PropertyRef Name="ClinicDoctorId" />
-            <PropertyRef Name="DepartmanName" />
-            <PropertyRef Name="WorkShiftName" />
           </Key>
           <Property Name="ClinicUserId" Type="int" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -142,15 +142,15 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwDoctor' does not have a primary
           <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
-          <Property Name="ClinicManagerId" Type="int" Nullable="false" />
-          <Property Name="InChargeOfAdmission" Type="bit" Nullable="false" />
-          <Property Name="WorkShiftId" Type="int" Nullable="false" />
-          <Property Name="DepartmentId" Type="int" Nullable="false" />
-          <Property Name="BancAccount" Type="int" Nullable="false" />
-          <Property Name="UniqueNumber" Type="int" Nullable="false" />
-          <Property Name="ClinicDoctorId" Type="int" Nullable="false" />
           <Property Name="DepartmanName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="WorkShiftName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClinicManagerId" Type="int" Nullable="false" />
+          <Property Name="WorkShiftId" Type="int" Nullable="false" />
+          <Property Name="InChargeOfAdmission" Type="bit" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="BancAccount" Type="bigint" Nullable="false" />
+          <Property Name="UniqueNumber" Type="int" Nullable="false" />
+          <Property Name="ClinicDoctorId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MedicaClinic.dbo.vwMaintenance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -240,8 +240,6 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwPatient' does not have a primar
             <PropertyRef Name="IsDeleted" />
             <PropertyRef Name="InsuranceNumber" />
             <PropertyRef Name="UniqueDoctorNumber" />
-            <PropertyRef Name="GenderName" />
-            <PropertyRef Name="DrUniquNumber" />
             <PropertyRef Name="ClinicPatientId" />
           </Key>
           <Property Name="ClinicUserId" Type="int" Nullable="false" />
@@ -257,11 +255,9 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwPatient' does not have a primar
           <Property Name="InsuranceNumber" Type="int" Nullable="false" />
           <Property Name="InsuranceExpirationDate" Type="date" />
           <Property Name="UniqueDoctorNumber" Type="int" Nullable="false" />
-          <Property Name="GenderName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="DrUniquNumber" Type="int" Nullable="false" />
           <Property Name="ClinicPatientId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__ClinicDoc__Clini__2CDD9F46">
+        <Association Name="FK__ClinicDoc__Clini__02B25B50">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -273,7 +269,7 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwPatient' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicDoc__Clini__2FBA0BF1">
+        <Association Name="FK__ClinicDoc__Clini__058EC7FB">
           <End Role="ClinicManager" Type="Self.ClinicManager" Multiplicity="1" />
           <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -285,7 +281,7 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwPatient' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicDoc__Depar__2DD1C37F">
+        <Association Name="FK__ClinicDoc__Depar__03A67F89">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -297,7 +293,7 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwPatient' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicDoc__WorkS__2EC5E7B8">
+        <Association Name="FK__ClinicDoc__WorkS__049AA3C2">
           <End Role="Workshift" Type="Self.Workshift" Multiplicity="1" />
           <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -309,7 +305,7 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwPatient' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicMai__Clini__24485945">
+        <Association Name="FK__ClinicMai__Clini__7A1D154F">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="ClinicMaintenance" Type="Self.ClinicMaintenance" Multiplicity="*" />
           <ReferentialConstraint>
@@ -321,7 +317,7 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwPatient' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicMan__Clini__2724C5F0">
+        <Association Name="FK__ClinicMan__Clini__7CF981FA">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="ClinicManager" Type="Self.ClinicManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -333,7 +329,7 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwPatient' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicPat__Clini__3296789C">
+        <Association Name="FK__ClinicPat__Clini__086B34A6">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="ClinicPatient" Type="Self.ClinicPatient" Multiplicity="*" />
           <ReferentialConstraint>
@@ -346,9 +342,9 @@ warning 6002: The table/view 'MedicaClinic.dbo.vwPatient' does not have a primar
           </ReferentialConstraint>
         </Association>
         <!--Errors Found During Generation:
-warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK__ClinicPat__Uniqu__347EC10E" />-->
-        <Association Name="FK__ClinicUse__Gende__19CACAD2">
+warning 6035: The relationship 'FK__ClinicPat__Uniqu__0A537D18' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__ClinicPat__Uniqu__0A537D18" />-->
+        <Association Name="FK__ClinicUse__Gende__6F9F86DC">
           <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -360,7 +356,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicUse__RoleI__1BB31344">
+        <Association Name="FK__ClinicUse__RoleI__7187CF4E">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -372,7 +368,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Instituti__Clini__216BEC9A">
+        <Association Name="FK__Instituti__Clini__7740A8A4">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="Institution" Type="Self.Institution" Multiplicity="*" />
           <ReferentialConstraint>
@@ -407,15 +403,15 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
     [vwDoctor].[Password] AS [Password], 
     [vwDoctor].[RoleId] AS [RoleId], 
     [vwDoctor].[IsDeleted] AS [IsDeleted], 
+    [vwDoctor].[DepartmanName] AS [DepartmanName], 
+    [vwDoctor].[WorkShiftName] AS [WorkShiftName], 
     [vwDoctor].[ClinicManagerId] AS [ClinicManagerId], 
-    [vwDoctor].[InChargeOfAdmission] AS [InChargeOfAdmission], 
     [vwDoctor].[WorkShiftId] AS [WorkShiftId], 
+    [vwDoctor].[InChargeOfAdmission] AS [InChargeOfAdmission], 
     [vwDoctor].[DepartmentId] AS [DepartmentId], 
     [vwDoctor].[BancAccount] AS [BancAccount], 
     [vwDoctor].[UniqueNumber] AS [UniqueNumber], 
-    [vwDoctor].[ClinicDoctorId] AS [ClinicDoctorId], 
-    [vwDoctor].[DepartmanName] AS [DepartmanName], 
-    [vwDoctor].[WorkShiftName] AS [WorkShiftName]
+    [vwDoctor].[ClinicDoctorId] AS [ClinicDoctorId]
     FROM [dbo].[vwDoctor] AS [vwDoctor]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwMaintenance" EntityType="Self.vwMaintenance" store:Type="Views" store:Schema="dbo">
@@ -473,48 +469,46 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
     [vwPatient].[InsuranceNumber] AS [InsuranceNumber], 
     [vwPatient].[InsuranceExpirationDate] AS [InsuranceExpirationDate], 
     [vwPatient].[UniqueDoctorNumber] AS [UniqueDoctorNumber], 
-    [vwPatient].[GenderName] AS [GenderName], 
-    [vwPatient].[DrUniquNumber] AS [DrUniquNumber], 
     [vwPatient].[ClinicPatientId] AS [ClinicPatientId]
     FROM [dbo].[vwPatient] AS [vwPatient]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__ClinicDoc__Clini__2CDD9F46" Association="Self.FK__ClinicDoc__Clini__2CDD9F46">
+          <AssociationSet Name="FK__ClinicDoc__Clini__02B25B50" Association="Self.FK__ClinicDoc__Clini__02B25B50">
             <End Role="ClinicUser" EntitySet="ClinicUser" />
             <End Role="ClinicDoctor" EntitySet="ClinicDoctor" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicDoc__Clini__2FBA0BF1" Association="Self.FK__ClinicDoc__Clini__2FBA0BF1">
+          <AssociationSet Name="FK__ClinicDoc__Clini__058EC7FB" Association="Self.FK__ClinicDoc__Clini__058EC7FB">
             <End Role="ClinicManager" EntitySet="ClinicManager" />
             <End Role="ClinicDoctor" EntitySet="ClinicDoctor" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicDoc__Depar__2DD1C37F" Association="Self.FK__ClinicDoc__Depar__2DD1C37F">
+          <AssociationSet Name="FK__ClinicDoc__Depar__03A67F89" Association="Self.FK__ClinicDoc__Depar__03A67F89">
             <End Role="Department" EntitySet="Department" />
             <End Role="ClinicDoctor" EntitySet="ClinicDoctor" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicDoc__WorkS__2EC5E7B8" Association="Self.FK__ClinicDoc__WorkS__2EC5E7B8">
+          <AssociationSet Name="FK__ClinicDoc__WorkS__049AA3C2" Association="Self.FK__ClinicDoc__WorkS__049AA3C2">
             <End Role="Workshift" EntitySet="Workshift" />
             <End Role="ClinicDoctor" EntitySet="ClinicDoctor" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicMai__Clini__24485945" Association="Self.FK__ClinicMai__Clini__24485945">
+          <AssociationSet Name="FK__ClinicMai__Clini__7A1D154F" Association="Self.FK__ClinicMai__Clini__7A1D154F">
             <End Role="ClinicUser" EntitySet="ClinicUser" />
             <End Role="ClinicMaintenance" EntitySet="ClinicMaintenance" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicMan__Clini__2724C5F0" Association="Self.FK__ClinicMan__Clini__2724C5F0">
+          <AssociationSet Name="FK__ClinicMan__Clini__7CF981FA" Association="Self.FK__ClinicMan__Clini__7CF981FA">
             <End Role="ClinicUser" EntitySet="ClinicUser" />
             <End Role="ClinicManager" EntitySet="ClinicManager" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicPat__Clini__3296789C" Association="Self.FK__ClinicPat__Clini__3296789C">
+          <AssociationSet Name="FK__ClinicPat__Clini__086B34A6" Association="Self.FK__ClinicPat__Clini__086B34A6">
             <End Role="ClinicUser" EntitySet="ClinicUser" />
             <End Role="ClinicPatient" EntitySet="ClinicPatient" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicUse__Gende__19CACAD2" Association="Self.FK__ClinicUse__Gende__19CACAD2">
+          <AssociationSet Name="FK__ClinicUse__Gende__6F9F86DC" Association="Self.FK__ClinicUse__Gende__6F9F86DC">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="ClinicUser" EntitySet="ClinicUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicUse__RoleI__1BB31344" Association="Self.FK__ClinicUse__RoleI__1BB31344">
+          <AssociationSet Name="FK__ClinicUse__RoleI__7187CF4E" Association="Self.FK__ClinicUse__RoleI__7187CF4E">
             <End Role="Role" EntitySet="Role" />
             <End Role="ClinicUser" EntitySet="ClinicUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__Instituti__Clini__216BEC9A" Association="Self.FK__Instituti__Clini__216BEC9A">
+          <AssociationSet Name="FK__Instituti__Clini__7740A8A4" Association="Self.FK__Instituti__Clini__7740A8A4">
             <End Role="ClinicUser" EntitySet="ClinicUser" />
             <End Role="Institution" EntitySet="Institution" />
           </AssociationSet>
@@ -531,15 +525,15 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           <Property Name="ClinicDoctorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClinicUserId" Type="Int32" Nullable="false" />
           <Property Name="UniqueNumber" Type="Int32" Nullable="false" />
-          <Property Name="BancAccount" Type="Int32" Nullable="false" />
+          <Property Name="BancAccount" Type="Int64" Nullable="false" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <Property Name="WorkShiftId" Type="Int32" Nullable="false" />
           <Property Name="InChargeOfAdmission" Type="Boolean" Nullable="false" />
           <Property Name="ClinicManagerId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicDoc__Clini__2CDD9F46" FromRole="ClinicDoctor" ToRole="ClinicUser" />
-          <NavigationProperty Name="ClinicManager" Relationship="Self.FK__ClinicDoc__Clini__2FBA0BF1" FromRole="ClinicDoctor" ToRole="ClinicManager" />
-          <NavigationProperty Name="Department" Relationship="Self.FK__ClinicDoc__Depar__2DD1C37F" FromRole="ClinicDoctor" ToRole="Department" />
-          <NavigationProperty Name="Workshift" Relationship="Self.FK__ClinicDoc__WorkS__2EC5E7B8" FromRole="ClinicDoctor" ToRole="Workshift" />
+          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicDoc__Clini__02B25B50" FromRole="ClinicDoctor" ToRole="ClinicUser" />
+          <NavigationProperty Name="ClinicManager" Relationship="Self.FK__ClinicDoc__Clini__058EC7FB" FromRole="ClinicDoctor" ToRole="ClinicManager" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__ClinicDoc__Depar__03A67F89" FromRole="ClinicDoctor" ToRole="Department" />
+          <NavigationProperty Name="Workshift" Relationship="Self.FK__ClinicDoc__WorkS__049AA3C2" FromRole="ClinicDoctor" ToRole="Workshift" />
         </EntityType>
         <EntityType Name="ClinicMaintenance">
           <Key>
@@ -550,7 +544,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           <Property Name="PermissionToExpandClinic" Type="Boolean" Nullable="false" />
           <Property Name="ResponsibleForVehicleAccessibility" Type="Boolean" Nullable="false" />
           <Property Name="ResponsibleForAccessOfHandicaps" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicMai__Clini__24485945" FromRole="ClinicMaintenance" ToRole="ClinicUser" />
+          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicMai__Clini__7A1D154F" FromRole="ClinicMaintenance" ToRole="ClinicUser" />
         </EntityType>
         <EntityType Name="ClinicManager">
           <Key>
@@ -562,8 +556,8 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           <Property Name="MaxNumOfDoctorsSupervised" Type="Int32" Nullable="false" />
           <Property Name="MinNumOfRoomSupervised" Type="Int32" Nullable="false" />
           <Property Name="NumberOfMistake" Type="Int32" />
-          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__Clini__2FBA0BF1" FromRole="ClinicManager" ToRole="ClinicDoctor" />
-          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicMan__Clini__2724C5F0" FromRole="ClinicManager" ToRole="ClinicUser" />
+          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__Clini__058EC7FB" FromRole="ClinicManager" ToRole="ClinicDoctor" />
+          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicMan__Clini__7CF981FA" FromRole="ClinicManager" ToRole="ClinicUser" />
         </EntityType>
         <EntityType Name="ClinicPatient">
           <Key>
@@ -574,7 +568,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           <Property Name="InsuranceNumber" Type="Int32" Nullable="false" />
           <Property Name="InsuranceExpirationDate" Type="DateTime" Precision="0" />
           <Property Name="UniqueDoctorNumber" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicPat__Clini__3296789C" FromRole="ClinicPatient" ToRole="ClinicUser" />
+          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__ClinicPat__Clini__086B34A6" FromRole="ClinicPatient" ToRole="ClinicUser" />
         </EntityType>
         <EntityType Name="ClinicUser">
           <Key>
@@ -590,13 +584,13 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__Clini__2CDD9F46" FromRole="ClinicUser" ToRole="ClinicDoctor" />
-          <NavigationProperty Name="ClinicMaintenances" Relationship="Self.FK__ClinicMai__Clini__24485945" FromRole="ClinicUser" ToRole="ClinicMaintenance" />
-          <NavigationProperty Name="ClinicManagers" Relationship="Self.FK__ClinicMan__Clini__2724C5F0" FromRole="ClinicUser" ToRole="ClinicManager" />
-          <NavigationProperty Name="ClinicPatients" Relationship="Self.FK__ClinicPat__Clini__3296789C" FromRole="ClinicUser" ToRole="ClinicPatient" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK__ClinicUse__Gende__19CACAD2" FromRole="ClinicUser" ToRole="Gender" />
-          <NavigationProperty Name="Role" Relationship="Self.FK__ClinicUse__RoleI__1BB31344" FromRole="ClinicUser" ToRole="Role" />
-          <NavigationProperty Name="Institutions" Relationship="Self.FK__Instituti__Clini__216BEC9A" FromRole="ClinicUser" ToRole="Institution" />
+          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__Clini__02B25B50" FromRole="ClinicUser" ToRole="ClinicDoctor" />
+          <NavigationProperty Name="ClinicMaintenances" Relationship="Self.FK__ClinicMai__Clini__7A1D154F" FromRole="ClinicUser" ToRole="ClinicMaintenance" />
+          <NavigationProperty Name="ClinicManagers" Relationship="Self.FK__ClinicMan__Clini__7CF981FA" FromRole="ClinicUser" ToRole="ClinicManager" />
+          <NavigationProperty Name="ClinicPatients" Relationship="Self.FK__ClinicPat__Clini__086B34A6" FromRole="ClinicUser" ToRole="ClinicPatient" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK__ClinicUse__Gende__6F9F86DC" FromRole="ClinicUser" ToRole="Gender" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__ClinicUse__RoleI__7187CF4E" FromRole="ClinicUser" ToRole="Role" />
+          <NavigationProperty Name="Institutions" Relationship="Self.FK__Instituti__Clini__7740A8A4" FromRole="ClinicUser" ToRole="Institution" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -604,7 +598,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           </Key>
           <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__Depar__2DD1C37F" FromRole="Department" ToRole="ClinicDoctor" />
+          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__Depar__03A67F89" FromRole="Department" ToRole="ClinicDoctor" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -612,7 +606,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           </Key>
           <Property Name="GenderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ClinicUsers" Relationship="Self.FK__ClinicUse__Gende__19CACAD2" FromRole="Gender" ToRole="ClinicUser" />
+          <NavigationProperty Name="ClinicUsers" Relationship="Self.FK__ClinicUse__Gende__6F9F86DC" FromRole="Gender" ToRole="ClinicUser" />
         </EntityType>
         <EntityType Name="Institution">
           <Key>
@@ -630,7 +624,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           <Property Name="AccessPointsForAmbulances" Type="Int32" Nullable="false" />
           <Property Name="AccessPointsForhandicaps" Type="Int32" Nullable="false" />
           <Property Name="ClinicUserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__Instituti__Clini__216BEC9A" FromRole="Institution" ToRole="ClinicUser" />
+          <NavigationProperty Name="ClinicUser" Relationship="Self.FK__Instituti__Clini__7740A8A4" FromRole="Institution" ToRole="ClinicUser" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -638,7 +632,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           </Key>
           <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ClinicUsers" Relationship="Self.FK__ClinicUse__RoleI__1BB31344" FromRole="Role" ToRole="ClinicUser" />
+          <NavigationProperty Name="ClinicUsers" Relationship="Self.FK__ClinicUse__RoleI__7187CF4E" FromRole="Role" ToRole="ClinicUser" />
         </EntityType>
         <EntityType Name="Workshift">
           <Key>
@@ -646,7 +640,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           </Key>
           <Property Name="WorkShiftId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__WorkS__2EC5E7B8" FromRole="Workshift" ToRole="ClinicDoctor" />
+          <NavigationProperty Name="ClinicDoctors" Relationship="Self.FK__ClinicDoc__WorkS__049AA3C2" FromRole="Workshift" ToRole="ClinicDoctor" />
         </EntityType>
         <EntityType Name="vwDoctor">
           <Key>
@@ -659,15 +653,15 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             <PropertyRef Name="Password" />
             <PropertyRef Name="RoleId" />
             <PropertyRef Name="IsDeleted" />
+            <PropertyRef Name="DepartmanName" />
+            <PropertyRef Name="WorkShiftName" />
             <PropertyRef Name="ClinicManagerId" />
-            <PropertyRef Name="InChargeOfAdmission" />
             <PropertyRef Name="WorkShiftId" />
+            <PropertyRef Name="InChargeOfAdmission" />
             <PropertyRef Name="DepartmentId" />
             <PropertyRef Name="BancAccount" />
             <PropertyRef Name="UniqueNumber" />
             <PropertyRef Name="ClinicDoctorId" />
-            <PropertyRef Name="DepartmanName" />
-            <PropertyRef Name="WorkShiftName" />
           </Key>
           <Property Name="ClinicUserId" Type="Int32" Nullable="false" />
           <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
@@ -679,15 +673,15 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="ClinicManagerId" Type="Int32" Nullable="false" />
-          <Property Name="InChargeOfAdmission" Type="Boolean" Nullable="false" />
-          <Property Name="WorkShiftId" Type="Int32" Nullable="false" />
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-          <Property Name="BancAccount" Type="Int32" Nullable="false" />
-          <Property Name="UniqueNumber" Type="Int32" Nullable="false" />
-          <Property Name="ClinicDoctorId" Type="Int32" Nullable="false" />
           <Property Name="DepartmanName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="WorkShiftName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClinicManagerId" Type="Int32" Nullable="false" />
+          <Property Name="WorkShiftId" Type="Int32" Nullable="false" />
+          <Property Name="InChargeOfAdmission" Type="Boolean" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="BancAccount" Type="Int64" Nullable="false" />
+          <Property Name="UniqueNumber" Type="Int32" Nullable="false" />
+          <Property Name="ClinicDoctorId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vwMaintenance">
           <Key>
@@ -771,8 +765,6 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             <PropertyRef Name="IsDeleted" />
             <PropertyRef Name="InsuranceNumber" />
             <PropertyRef Name="UniqueDoctorNumber" />
-            <PropertyRef Name="GenderName" />
-            <PropertyRef Name="DrUniquNumber" />
             <PropertyRef Name="ClinicPatientId" />
           </Key>
           <Property Name="ClinicUserId" Type="Int32" Nullable="false" />
@@ -788,11 +780,9 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           <Property Name="InsuranceNumber" Type="Int32" Nullable="false" />
           <Property Name="InsuranceExpirationDate" Type="DateTime" Precision="0" />
           <Property Name="UniqueDoctorNumber" Type="Int32" Nullable="false" />
-          <Property Name="GenderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DrUniquNumber" Type="Int32" Nullable="false" />
           <Property Name="ClinicPatientId" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK__ClinicDoc__Clini__2CDD9F46">
+        <Association Name="FK__ClinicDoc__Clini__02B25B50">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -804,7 +794,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicDoc__Clini__2FBA0BF1">
+        <Association Name="FK__ClinicDoc__Clini__058EC7FB">
           <End Role="ClinicManager" Type="Self.ClinicManager" Multiplicity="1" />
           <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -816,7 +806,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicDoc__Depar__2DD1C37F">
+        <Association Name="FK__ClinicDoc__Depar__03A67F89">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -828,7 +818,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicDoc__WorkS__2EC5E7B8">
+        <Association Name="FK__ClinicDoc__WorkS__049AA3C2">
           <End Role="Workshift" Type="Self.Workshift" Multiplicity="1" />
           <End Role="ClinicDoctor" Type="Self.ClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -840,7 +830,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicMai__Clini__24485945">
+        <Association Name="FK__ClinicMai__Clini__7A1D154F">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="ClinicMaintenance" Type="Self.ClinicMaintenance" Multiplicity="*" />
           <ReferentialConstraint>
@@ -852,7 +842,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicMan__Clini__2724C5F0">
+        <Association Name="FK__ClinicMan__Clini__7CF981FA">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="ClinicManager" Type="Self.ClinicManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -864,7 +854,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicPat__Clini__3296789C">
+        <Association Name="FK__ClinicPat__Clini__086B34A6">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="ClinicPatient" Type="Self.ClinicPatient" Multiplicity="*" />
           <ReferentialConstraint>
@@ -876,7 +866,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicUse__Gende__19CACAD2">
+        <Association Name="FK__ClinicUse__Gende__6F9F86DC">
           <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -888,7 +878,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ClinicUse__RoleI__1BB31344">
+        <Association Name="FK__ClinicUse__RoleI__7187CF4E">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -900,7 +890,7 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Instituti__Clini__216BEC9A">
+        <Association Name="FK__Instituti__Clini__7740A8A4">
           <End Role="ClinicUser" Type="Self.ClinicUser" Multiplicity="1" />
           <End Role="Institution" Type="Self.Institution" Multiplicity="*" />
           <ReferentialConstraint>
@@ -927,43 +917,43 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
           <EntitySet Name="vwMaintenances" EntityType="Self.vwMaintenance" />
           <EntitySet Name="vwManagers" EntityType="Self.vwManager" />
           <EntitySet Name="vwPatients" EntityType="Self.vwPatient" />
-          <AssociationSet Name="FK__ClinicDoc__Clini__2CDD9F46" Association="Self.FK__ClinicDoc__Clini__2CDD9F46">
+          <AssociationSet Name="FK__ClinicDoc__Clini__02B25B50" Association="Self.FK__ClinicDoc__Clini__02B25B50">
             <End Role="ClinicUser" EntitySet="ClinicUsers" />
             <End Role="ClinicDoctor" EntitySet="ClinicDoctors" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicDoc__Clini__2FBA0BF1" Association="Self.FK__ClinicDoc__Clini__2FBA0BF1">
+          <AssociationSet Name="FK__ClinicDoc__Clini__058EC7FB" Association="Self.FK__ClinicDoc__Clini__058EC7FB">
             <End Role="ClinicManager" EntitySet="ClinicManagers" />
             <End Role="ClinicDoctor" EntitySet="ClinicDoctors" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicDoc__Depar__2DD1C37F" Association="Self.FK__ClinicDoc__Depar__2DD1C37F">
+          <AssociationSet Name="FK__ClinicDoc__Depar__03A67F89" Association="Self.FK__ClinicDoc__Depar__03A67F89">
             <End Role="Department" EntitySet="Departments" />
             <End Role="ClinicDoctor" EntitySet="ClinicDoctors" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicDoc__WorkS__2EC5E7B8" Association="Self.FK__ClinicDoc__WorkS__2EC5E7B8">
+          <AssociationSet Name="FK__ClinicDoc__WorkS__049AA3C2" Association="Self.FK__ClinicDoc__WorkS__049AA3C2">
             <End Role="Workshift" EntitySet="Workshifts" />
             <End Role="ClinicDoctor" EntitySet="ClinicDoctors" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicMai__Clini__24485945" Association="Self.FK__ClinicMai__Clini__24485945">
+          <AssociationSet Name="FK__ClinicMai__Clini__7A1D154F" Association="Self.FK__ClinicMai__Clini__7A1D154F">
             <End Role="ClinicUser" EntitySet="ClinicUsers" />
             <End Role="ClinicMaintenance" EntitySet="ClinicMaintenances" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicMan__Clini__2724C5F0" Association="Self.FK__ClinicMan__Clini__2724C5F0">
+          <AssociationSet Name="FK__ClinicMan__Clini__7CF981FA" Association="Self.FK__ClinicMan__Clini__7CF981FA">
             <End Role="ClinicUser" EntitySet="ClinicUsers" />
             <End Role="ClinicManager" EntitySet="ClinicManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicPat__Clini__3296789C" Association="Self.FK__ClinicPat__Clini__3296789C">
+          <AssociationSet Name="FK__ClinicPat__Clini__086B34A6" Association="Self.FK__ClinicPat__Clini__086B34A6">
             <End Role="ClinicUser" EntitySet="ClinicUsers" />
             <End Role="ClinicPatient" EntitySet="ClinicPatients" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicUse__Gende__19CACAD2" Association="Self.FK__ClinicUse__Gende__19CACAD2">
+          <AssociationSet Name="FK__ClinicUse__Gende__6F9F86DC" Association="Self.FK__ClinicUse__Gende__6F9F86DC">
             <End Role="Gender" EntitySet="Genders" />
             <End Role="ClinicUser" EntitySet="ClinicUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK__ClinicUse__RoleI__1BB31344" Association="Self.FK__ClinicUse__RoleI__1BB31344">
+          <AssociationSet Name="FK__ClinicUse__RoleI__7187CF4E" Association="Self.FK__ClinicUse__RoleI__7187CF4E">
             <End Role="Role" EntitySet="Roles" />
             <End Role="ClinicUser" EntitySet="ClinicUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Instituti__Clini__216BEC9A" Association="Self.FK__Instituti__Clini__216BEC9A">
+          <AssociationSet Name="FK__Instituti__Clini__7740A8A4" Association="Self.FK__Instituti__Clini__7740A8A4">
             <End Role="ClinicUser" EntitySet="ClinicUsers" />
             <End Role="Institution" EntitySet="Institutions" />
           </AssociationSet>
@@ -1101,15 +1091,15 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DepartmanName" ColumnName="DepartmanName" />
+                <ScalarProperty Name="WorkShiftName" ColumnName="WorkShiftName" />
                 <ScalarProperty Name="ClinicManagerId" ColumnName="ClinicManagerId" />
-                <ScalarProperty Name="InChargeOfAdmission" ColumnName="InChargeOfAdmission" />
                 <ScalarProperty Name="WorkShiftId" ColumnName="WorkShiftId" />
+                <ScalarProperty Name="InChargeOfAdmission" ColumnName="InChargeOfAdmission" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="BancAccount" ColumnName="BancAccount" />
                 <ScalarProperty Name="UniqueNumber" ColumnName="UniqueNumber" />
                 <ScalarProperty Name="ClinicDoctorId" ColumnName="ClinicDoctorId" />
-                <ScalarProperty Name="DepartmanName" ColumnName="DepartmanName" />
-                <ScalarProperty Name="WorkShiftName" ColumnName="WorkShiftName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1173,8 +1163,6 @@ warning 6035: The relationship 'FK__ClinicPat__Uniqu__347EC10E' has columns that
                 <ScalarProperty Name="InsuranceNumber" ColumnName="InsuranceNumber" />
                 <ScalarProperty Name="InsuranceExpirationDate" ColumnName="InsuranceExpirationDate" />
                 <ScalarProperty Name="UniqueDoctorNumber" ColumnName="UniqueDoctorNumber" />
-                <ScalarProperty Name="GenderName" ColumnName="GenderName" />
-                <ScalarProperty Name="DrUniquNumber" ColumnName="DrUniquNumber" />
                 <ScalarProperty Name="ClinicPatientId" ColumnName="ClinicPatientId" />
               </MappingFragment>
             </EntityTypeMapping>
