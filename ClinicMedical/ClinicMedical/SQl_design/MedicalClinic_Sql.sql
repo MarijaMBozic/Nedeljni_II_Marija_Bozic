@@ -1,3 +1,5 @@
+CREATE DATABASE MedicaClinic;
+GO
 Use MedicaClinic
 
 drop table if exists ClinicPatient
@@ -132,3 +134,41 @@ values('Gynecology'),
       ('Orthopedics'),
 	  ('Pediatrics'),
 	  ('Ophthalmology')
+
+go
+
+CREATE VIEW vwDoctor AS
+	SELECT        dbo.ClinicUser.ClinicUserId, dbo.ClinicUser.FullName, dbo.ClinicUser.IDNumber, dbo.ClinicUser.GenderId, dbo.ClinicUser.DateOfBirth, dbo.ClinicUser.Citizenship, dbo.ClinicUser.Username, dbo.ClinicUser.Password, 
+                         dbo.ClinicUser.RoleId, dbo.ClinicUser.IsDeleted, dbo.Department.Name AS DepartmanName, dbo.Workshift.Name AS WorkShiftName, dbo.ClinicDoctor.ClinicManagerId, dbo.ClinicDoctor.WorkShiftId, 
+                         dbo.ClinicDoctor.InChargeOfAdmission, dbo.ClinicDoctor.DepartmentId, dbo.ClinicDoctor.BancAccount, dbo.ClinicDoctor.UniqueNumber, dbo.ClinicDoctor.ClinicDoctorId
+	FROM            dbo.ClinicUser INNER JOIN
+                         dbo.ClinicDoctor ON dbo.ClinicUser.ClinicUserId = dbo.ClinicDoctor.ClinicUserId INNER JOIN
+                         dbo.Department ON dbo.ClinicDoctor.DepartmentId = dbo.Department.DepartmentId INNER JOIN
+                         dbo.Workshift ON dbo.ClinicDoctor.WorkShiftId = dbo.Workshift.WorkShiftId
+
+go
+
+CREATE VIEW vwMaintenance AS
+	SELECT        dbo.ClinicUser.ClinicUserId, dbo.ClinicUser.FullName, dbo.ClinicUser.IDNumber, dbo.ClinicUser.GenderId, dbo.ClinicUser.DateOfBirth, dbo.ClinicUser.Citizenship, dbo.ClinicUser.Username, dbo.ClinicUser.Password, 
+                         dbo.ClinicUser.RoleId, dbo.ClinicUser.IsDeleted, dbo.Gender.Name, dbo.ClinicMaintenance.PermissionToExpandClinic, dbo.ClinicMaintenance.ResponsibleForVehicleAccessibility, 
+                         dbo.ClinicMaintenance.ResponsibleForAccessOfHandicaps, dbo.ClinicMaintenance.ClinicMaintenanceId
+    FROM            dbo.ClinicUser INNER JOIN
+                         dbo.Gender ON dbo.ClinicUser.GenderId = dbo.Gender.GenderId INNER JOIN
+                         dbo.ClinicMaintenance ON dbo.ClinicUser.ClinicUserId = dbo.ClinicMaintenance.ClinicUserId
+
+go
+
+CREATE VIEW vwManagers AS
+	SELECT        dbo.ClinicUser.ClinicUserId, dbo.ClinicUser.FullName, dbo.ClinicUser.IDNumber, dbo.ClinicUser.GenderId, dbo.ClinicUser.DateOfBirth, dbo.ClinicUser.Citizenship, dbo.ClinicUser.Username, dbo.ClinicUser.Password, 
+                         dbo.ClinicUser.RoleId, dbo.ClinicUser.IsDeleted, dbo.Gender.Name AS GenderName, dbo.ClinicManager.ClinicManagerId, dbo.ClinicManager.ClinicUserId AS Expr1, dbo.ClinicManager.ClinicFloor, 
+                         dbo.ClinicManager.MaxNumOfDoctorsSupervised, dbo.ClinicManager.MinNumOfRoomSupervised, dbo.ClinicManager.NumberOfMistake
+	FROM            dbo.ClinicUser INNER JOIN
+                         dbo.Gender ON dbo.ClinicUser.GenderId = dbo.Gender.GenderId INNER JOIN
+                         dbo.ClinicManager ON dbo.ClinicUser.ClinicUserId = dbo.ClinicManager.ClinicUserId
+go
+
+CREATE VIEW vwPatient AS
+	SELECT        dbo.ClinicUser.ClinicUserId, dbo.ClinicUser.FullName, dbo.ClinicUser.IDNumber, dbo.ClinicUser.GenderId, dbo.ClinicUser.DateOfBirth, dbo.ClinicUser.Citizenship, dbo.ClinicUser.Username, dbo.ClinicUser.Password, 
+                         dbo.ClinicUser.RoleId, dbo.ClinicUser.IsDeleted, dbo.ClinicPatient.InsuranceNumber, dbo.ClinicPatient.InsuranceExpirationDate, dbo.ClinicPatient.UniqueDoctorNumber, dbo.ClinicPatient.ClinicPatientId
+	FROM            dbo.ClinicUser INNER JOIN
+                         dbo.ClinicPatient ON dbo.ClinicUser.ClinicUserId = dbo.ClinicPatient.ClinicUserId
